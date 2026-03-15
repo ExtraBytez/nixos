@@ -87,6 +87,7 @@ in
       "nix-command"
       "flakes"
     ];
+    download-buffer-size = 134217728;
     substituters = [ "https://hyprland.cachix.org" ];
     trusted-substituters = [ "https://hyprland.cachix.org" ];
     trusted-public-keys = [
