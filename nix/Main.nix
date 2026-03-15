@@ -88,6 +88,8 @@ in
       "flakes"
     ];
     download-buffer-size = 134217728;
+    cores = 0;
+    max-jobs = "auto";
     substituters = [ "https://hyprland.cachix.org" ];
     trusted-substituters = [ "https://hyprland.cachix.org" ];
     trusted-public-keys = [

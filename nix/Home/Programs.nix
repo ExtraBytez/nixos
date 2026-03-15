@@ -20,22 +20,11 @@ in
     neovim = {
       enable = true;
     };
-    git = {
-      enable = true;
-      settings = {
-        # Deprecated in favor of gh auth login
-        #user = {
-        # name = "${env.gituser}";
-        #  email = "${env.gitemail}";
-        # };
-        core.editor = "nvim";
-        pull.rebase = true;
-      };
-    };
     zsh = {
       enable = true;
       shellAliases = {
-        ns = "echo 'Rebuilding NixOS...' && sudo nixos-rebuild switch --flake $HOME/.config/nixos/nix --impure --quiet --cores=$(nproc) --max-jobs=$(nproc) --show-trace && echo Done!";
+        ns = "sudo nixos-rebuild switch --flake ~/.config/nixos/nix --fast";
+        nso = "echo 'Rebuilding NixOS...' && sudo nixos-rebuild switch --flake $HOME/.config/nixos/nix --impure --quiet --show-trace && echo Done!";
         cat = "lolcat";
         lcm = "sudo ip link set wlp0s20f3 down && sudo macchanger -r wlp0s20f3 && sudo ip link set wlp0s20f3 up";
         lcmp = "sudo ip link set wlp0s20f3 down && sudo macchanger -m 3e:30:12:6f:31:ec wlp0s20f3 && sudo ip link set wlp0s20f3 up";
@@ -44,8 +33,8 @@ in
         du = "dust";
         ls = "eza";
         ll = "eza -la";
-        nup = "cd $HOME/.config/nixos/nix/ && sudo nix flake update && ns";
-        ngc = "sudo nix-collect-garbage -d && nix-collect-garbage -d && sudo nix-store --gc && nix-store --gc";
+        nup = "cd $HOME/.config/nixos/nix/ && sudo nix flake update";
+        ngc = "sudo nix-collect-garbage -d && nix-store --optimise";
         nce = "nix-env -q | fzf --multi | xargs -r nix-env -e";
         cfg = "zeditor ~/.config/nixos/";
         gitbk = "zsh $HOME/.config/nixos/scripts/gitbk.zsh";
