@@ -20,11 +20,11 @@ in
   };
 
   config = lib.mkIf config.windowmanager.enable {
-    programs.light.enable = true;
     programs.hyprland.enable = true;
     environment.systemPackages = with pkgs; [
       inputs.awww.packages.${pkgs.stdenv.hostPlatform.system}.awww
       wev
+      brightnessctl
       xwayland-satellite
       fuzzel
       gnome-keyring
