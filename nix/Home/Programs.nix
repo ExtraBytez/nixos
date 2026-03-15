@@ -20,10 +20,11 @@ in
     neovim = {
       enable = true;
     };
+    git.enable = true;
     zsh = {
       enable = true;
       shellAliases = {
-        ns = "sudo nixos-rebuild switch --flake ~/.config/nixos/nix --fast";
+        ns = "sudo nixos-rebuild switch --flake ~/.config/nixos/nix --no-reexec --impure --quiet";
         nso = "echo 'Rebuilding NixOS...' && sudo nixos-rebuild switch --flake $HOME/.config/nixos/nix --impure --quiet --show-trace && echo Done!";
         cat = "lolcat";
         lcm = "sudo ip link set wlp0s20f3 down && sudo macchanger -r wlp0s20f3 && sudo ip link set wlp0s20f3 up";
