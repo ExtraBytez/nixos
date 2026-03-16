@@ -1,20 +1,6 @@
 clear
-# START BLOCK
-echo "Starting Installer..."
-TARGET_USER="$USER"
-TARGET_HOSTNAME="$(hostname)"
-echo "Detected configuration:"
-echo "  Username: $TARGET_USER"
-echo "  Hostname: $TARGET_HOSTNAME"
-read -p "Continue with this configuration? (y/N): " confirm
-if [ "$confirm" != "y" ]; then
-  sudo nano /etc/nixos/configuration.nix
-  sudo nixos-rebuild switch
-  sudo reboot
-fi
-nix-env -iA nixos.lolcat
-clear
-# INTRO BLOCK
+nix-shell -p lolcat --run
+"""
 lolcat <<"EOF"
 ███    ██  █████  ████████ ███████ ███████     ███    ██ ██ ██   ██  ██████  ███████     ██ ███    ██ ███████ ████████  █████  ██      ██      ███████ ██████
 ████   ██ ██   ██    ██    ██      ██          ████   ██ ██  ██ ██  ██    ██ ██          ██ ████   ██ ██         ██    ██   ██ ██      ██      ██      ██   ██
@@ -23,10 +9,8 @@ lolcat <<"EOF"
 ██   ████ ██   ██    ██    ███████ ███████     ██   ████ ██ ██   ██  ██████  ███████     ██ ██   ████ ███████    ██    ██   ██ ███████ ███████ ███████ ██   ██
 
 EOF
+"""
 sudo nixos-generate-config 2>/dev/null
-nix-env -e lolcat 2>/dev/null
-# INSTALLING BLOCK
-echo "Installing..."
 mkdir -p ~/.config/nixos
 mv ~/nixos/.git ~/.config/nixos/
 mv ~/nixos/.gitignore ~/.config/nixos/
@@ -34,9 +18,9 @@ mv ~/nixos/.gitattributes ~/.config/nixos/
 mv ~/nixos/* ~/.config/nixos/
 cat >~/.config/nixos/nix/env.nix <<EOF
 {
-  username = "$USER";
-  hostname = "$(hostname)";
-  fullname = "FullName";
+  username = "Your User Name";
+  hostname = "Your Computer Name";
+  fullname = "Your Full Name";
   ssid = "Network SSID";
   netkey = "Network password";
   gateway = "Network Gateway";
@@ -45,8 +29,8 @@ cat >~/.config/nixos/nix/env.nix <<EOF
   server = "Server IP";
   dns = "DNS server";
   domain = "Server Domain"
-  gitkey = "";
-  folder = "bg";
+  gitkey = "Forjo API key";
+  folder = "bg-folder";
   imgbb = "imgbb api key";
   lockimg = "bg/yhole.jpeg";
   wallpass = "";
@@ -59,13 +43,10 @@ echo "{ ... }: {}" >~/.config/nixos/nix/custom.nix
 echo "{ ... }: {}" >~/.config/nixos/nix/custom-home.nix
 rmdir ~/nixos ~/Desktop ~/Documents ~/Downloads ~/Music ~/Pictures ~/Public ~/Templates ~/Videos 2>/dev/null
 rm ~/.config/user-dirs.dirs 2>/dev/null
-echo "Getting hardware config..."
 sudo mv /etc/nixos/hardware-configuration.nix ~/.config/nixos/nix/hardware.nix
-echo "Removing old config..."
 sudo rm -rf /etc/nixos/
 cat >~/.config/nixos/nix/options.nix <<EOF
 { ... }:
-
 {
 config = {
 windowmanager.enable = true;
@@ -94,15 +75,4 @@ work.enable = false;
 EOF
 chmod -R +x $HOME/.config/nixos/scripts/
 nano $HOME/.config/nixos/nix/options.nix
-echo 'Rebuilding NixOS...' && sudo nixos-rebuild switch --flake $HOME/.config/nixos/nix --impure --quiet --cores=$(nproc) --max-jobs=$(nproc) && echo Done!
-echo "Cleaning up..."
-nix-env -e git 2>/dev/null
-clear
-echo "Script complete. Reboot? (y/N)"
-read rebootcon
-if [ "$rebootcon" = "y" ]; then
-  reboot
-else
-  echo "Skipping reboot."
-  exit 0
-fi
+echo 'Rebuilding NixOS...' && nix-shell -p git --run "sudo nixos-rebuild switch --flake $HOME/.config/nixos/nix --impure --quiet --cores=$(nproc) --max-jobs=$(nproc)" && echo Done!
