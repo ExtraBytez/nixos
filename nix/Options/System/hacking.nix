@@ -18,7 +18,7 @@ in
     description = "Enable Hacking.";
   };
 
-  config = lib.mkIf config.gaming.enable {
+  config = lib.mkIf config.hacking.enable {
     environment.systemPackages = with pkgs; [
       arp-scan
       binutils
