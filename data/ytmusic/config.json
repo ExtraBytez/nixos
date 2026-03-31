@@ -1,7 +1,7 @@
 {
   "window-size": {
-    "width": 1920,
-    "height": 1080
+    "width": 950,
+    "height": 1005
   },
   "window-maximized": true,
   "window-position": {
@@ -17,29 +17,41 @@
     "hideMenuWarned": false,
     "startAtLogin": false,
     "disableHardwareAcceleration": false,
-    "removeUpgradeButton": false,
+    "removeUpgradeButton": true,
     "restartOnConfigChanges": false,
-    "trayClickPlayPause": false,
+    "trayClickPlayPause": true,
     "autoResetAppCache": false,
     "resumeOnStart": true,
     "likeButtons": "",
     "proxy": "",
-    "startingPage": "",
-    "overrideUserAgent": false,
+    "startingPage": "Library",
+    "overrideUserAgent": true,
     "usePodcastParticipantAsArtist": false,
-    "themes": []
+    "themes": ["~/.config/nixos/data/ytmusic/mocha.css"],
+    "customWindowTitle": "Music"
   },
   "plugins": {
     "notifications": {},
     "video-toggle": {
-      "mode": "custom"
+      "enabled": false,
+      "hideVideo": false,
+      "mode": "native",
+      "forceHide": false,
+      "align": "left"
     },
     "precise-volume": {
       "globalShortcuts": {}
     },
     "discord": {
-      "listenAlong": true,
-      "enabled": true
+      "enabled": true,
+      "autoReconnect": true,
+      "activityTimeoutEnabled": true,
+      "activityTimeoutTime": 600000,
+      "playOnYouTubeMusic": false,
+      "hideGitHubButton": true,
+      "hideDurationLeft": true,
+      "statusDisplayType": 0,
+      "listenAlong": true
     },
     "sponsorblock": {
       "enabled": true
@@ -49,6 +61,143 @@
     },
     "bypass-age-restrictions": {
       "enabled": true
+    },
+    "shortcuts": {
+      "enabled": true
+    },
+    "album-actions": {
+      "enabled": true
+    },
+    "album-color-theme": {
+      "enabled": true
+    },
+    "ambient-mode": {
+      "enabled": true
+    },
+    "amuse": {
+      "enabled": false
+    },
+    "audio-compressor": {
+      "enabled": false
+    },
+    "auth-proxy-adapter": {
+      "enabled": true
+    },
+    "blur-nav-bar": {
+      "enabled": true
+    },
+    "captions-selector": {
+      "enabled": true,
+      "disableCaptions": true,
+      "autoload": false,
+      "lastCaptionsCode": ""
+    },
+    "compact-sidebar": {
+      "enabled": true
+    },
+    "crossfade": {
+      "enabled": true
+    },
+    "downloader": {
+      "enabled": true
+    },
+    "equalizer": {
+      "enabled": true
+    },
+    "exponential-volume": {
+      "enabled": false
+    },
+    "scrobbler": {
+      "enabled": false
+    },
+    "in-app-menu": {
+      "enabled": true,
+      "hideDOMWindowControls": true
+    },
+    "synced-lyrics": {
+      "enabled": true,
+      "preciseTiming": true,
+      "showLyricsEvenIfInexact": true,
+      "showTimeCodes": false,
+      "defaultTextString": "♪",
+      "lineEffect": "fancy",
+      "romanization": true,
+      "preferredProvider": "LRCLib"
+    },
+    "unobtrusive-player": {
+      "enabled": true
+    },
+    "quality-changer": {
+      "enabled": true
+    },
+    "visualizer": {
+      "enabled": false,
+      "type": "wave",
+      "butterchurn": {
+        "preset": "martin [shadow harlequins shape code] - fata morgana",
+        "renderingFrequencyInMs": 500,
+        "blendTimeInSeconds": 2.7
+      },
+      "vudio": {
+        "effect": "lighting",
+        "accuracy": 128,
+        "lighting": {
+          "maxHeight": 160,
+          "maxSize": 12,
+          "lineWidth": 1,
+          "color": "#49f3f7",
+          "shadowBlur": 2,
+          "shadowColor": "rgba(244,244,244,.5)",
+          "fadeSide": true,
+          "prettify": false,
+          "horizontalAlign": "center",
+          "verticalAlign": "middle",
+          "dottify": true
+        }
+      },
+      "wave": {
+        "animations": [
+          {
+            "type": "Cubes",
+            "config": {
+              "bottom": true,
+              "count": 30,
+              "cubeHeight": 5,
+              "fillColor": {
+                "gradient": ["#FAD961", "#F76B1C"]
+              },
+              "lineColor": "rgba(0,0,0,0)",
+              "radius": 20
+            }
+          },
+          {
+            "type": "Cubes",
+            "config": {
+              "top": true,
+              "count": 12,
+              "cubeHeight": 5,
+              "fillColor": {
+                "gradient": ["#FAD961", "#F76B1C"]
+              },
+              "lineColor": "rgba(0,0,0,0)",
+              "radius": 10
+            }
+          },
+          {
+            "type": "Circles",
+            "config": {
+              "lineColor": {
+                "gradient": ["#FAD961", "#FAD961", "#F76B1C"],
+                "rotate": 90
+              },
+              "lineWidth": 4,
+              "diameter": 20,
+              "count": 10,
+              "frequencyBand": "base"
+            }
+          }
+        ]
+      }
     }
   },
   "__internal__": {
