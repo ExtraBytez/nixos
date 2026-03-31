@@ -29,6 +29,7 @@ in
       mkdir -p "$HOME/.config/YouTube Music"
       cp -f ${../../../data/ytmusic/config.json} \
         "$HOME/.config/YouTube Music/config.json"
+      sed -i -e "s|@YT_THEME@|/home/${username}/.config/nixos/data/ytmusic/mocha.css|g" "$HOME/.config/YouTube Music/config.json"
     '';
 
     xdg.desktopEntries = {

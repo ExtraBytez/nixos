@@ -27,7 +27,7 @@
     "startingPage": "Library",
     "overrideUserAgent": true,
     "usePodcastParticipantAsArtist": false,
-    "themes": ["~/.config/nixos/data/ytmusic/mocha.css"],
+    "themes": ["@YT_THEME@"],
     "customWindowTitle": "Music"
   },
   "plugins": {
