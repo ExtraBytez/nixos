@@ -21,9 +21,9 @@ in
   };
 
   config = lib.mkIf config.gaming.enable {
-    environment.systemPackages = with pkgs; [
-      winegdk
-    ];
+    #environment.systemPackages = with pkgs; [
+    #winegdk
+    #];
     programs.steam.enable = true;
     hardware.graphics.enable32Bit = true;
     hardware.graphics.enable = true;
