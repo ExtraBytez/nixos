@@ -27,6 +27,14 @@ in
     home.packages = with pkgs; [
       opensnitch-ui
     ];
+    xdg.desktopEntries = {
+      opensnitch_ui = {
+        name = "Snitch";
+        icon = "firewall-config";
+        exec = "opensnitch-ui";
+        categories = [ "System" ];
+      };
+    };
     wayland.windowManager.hyprland.settings.exec-once = lib.mkAfter [
       "opensnitch-ui"
     ];

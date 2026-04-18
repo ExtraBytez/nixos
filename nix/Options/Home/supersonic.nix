@@ -32,11 +32,18 @@ in
   };
 
   config = lib.mkIf cfg.enable {
+    xdg.desktopEntries.supersonic-wayland = {
+      name = "Music";
+      icon = "juk";
+      exec = "supersonic-wayland";
+      categories = [ "AudioVideo" ];
+    };
     xdg.desktopEntries.supersonic = {
       name = "Music";
       icon = "juk";
       exec = "supersonic";
       categories = [ "AudioVideo" ];
+      noDisplay = true;
     };
     home.packages = [ pkgs.supersonic-wayland ];
     home.file = {
