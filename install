@@ -70,6 +70,7 @@ japanese.enable = false;
 supersonic.enable = false;
 ytmusic.enable = false;
 work.enable = false;
+jelly.enable = true;
 };
 }
 EOF
