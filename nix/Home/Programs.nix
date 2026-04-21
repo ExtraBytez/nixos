@@ -25,8 +25,6 @@ in
       enable = true;
       shellAliases = {
         ns = "sudo nixos-rebuild switch --flake ~/.config/nixos/nix --no-reexec --impure --quiet";
-        nso = "echo 'Rebuilding NixOS...' && sudo nixos-rebuild switch --flake $HOME/.config/nixos/nix --impure --quiet --show-trace && echo Done!";
-        cat = "lolcat";
         lcm = "sudo ip link set wlp0s20f3 down && sudo macchanger -r wlp0s20f3 && sudo ip link set wlp0s20f3 up";
         lcmp = "sudo ip link set wlp0s20f3 down && sudo macchanger -m 3e:30:12:6f:31:ec wlp0s20f3 && sudo ip link set wlp0s20f3 up";
         ba = "cat /sys/class/power_supply/BAT0/status && cat /sys/class/power_supply/BAT0/capacity";
@@ -36,13 +34,10 @@ in
         ll = "eza -la";
         nup = "cd $HOME/.config/nixos/nix/ && sudo nix flake update";
         ngc = "sudo nix-collect-garbage -d && nix-store --optimise";
-        nce = "nix-env -q | fzf --multi | xargs -r nix-env -e";
         cfg = "zeditor ~/.config/nixos/";
-        gitbk = "zsh $HOME/.config/nixos/scripts/gitbk.zsh";
-        dcd = "docker-compose down";
-        dcu = "docker-compose up -d";
-        dcuf = "docker-compose up";
-        nca = "nix-env -e '.*'";
+        dcd = "docker compose down";
+        dcu = "docker compose up -d";
+        dcuf = "docker compose up";
         spaper = "zsh $HOME/.config/nixos/scripts/switchwall.zsh";
         img = "chafa";
         server = "ssh ${env.username}@${env.server}";
