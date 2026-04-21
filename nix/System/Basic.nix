@@ -4,6 +4,11 @@
 }:
 {
   environment.systemPackages = with pkgs; [
+    tldr
+    gitui
+    tree
+    term-scp
+    arp-scan
     chafa
     pfetch
     playerctl
@@ -25,6 +30,8 @@
     jq
     ripgrep
     fd
+    macchanger
+    gdb
   ];
   programs = {
     nix-ld.enable = true;

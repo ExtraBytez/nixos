@@ -20,21 +20,18 @@ in
 
   config = lib.mkIf config.hacking.enable {
     environment.systemPackages = with pkgs; [
-      arp-scan
       binutils
       radare2
       exiftool
       httpie
-      macchanger
       ltrace
-      gdb
       cyme
       nmap
       util-linux
       wireshark
       hollywood
     ];
-    programs.firejail.enable = true;
+    #programs.firejail.enable = true;
     programs.wireshark = {
       enable = true;
       dumpcap.enable = true;

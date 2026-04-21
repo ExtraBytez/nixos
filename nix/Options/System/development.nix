@@ -22,15 +22,10 @@ in
   config = lib.mkIf config.development.enable {
     environment.systemPackages = with pkgs; [
       pkgs-stable.rustfmt
-      tldr
-      gitui
       cruise
       docker
       docker-compose
-      tree
-      termscp
       gcc
-      arp-scan
     ];
     virtualisation.docker.enable = true;
     home-manager.users.${username}.development.enable = true;

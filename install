@@ -53,27 +53,26 @@ cat >~/.config/nixos/nix/options.nix <<EOF
 config = {
 windowmanager.enable = true;
 managenet.enable = false;
-gaming.enable = false;
-hacking.enable = false;
-development.enable = false;
-vpn.enable = false;
-opensnitch.enable = false;
 ssh.enable = false;
-qemu.enable = false;
-font.enable = false;
-streaming.enable = false;
-gui.enable = false;
-airdrop.enable = false;
-mpris.enable = false;
-entertainment.enable = false;
-drawing.enable = false;
-chat.enable = false;
-japanese.enable = false;
-supersonic.enable = false;
 ytmusic.enable = false;
-work.enable = false;
 jelly.enable = false;
-spinner.enable = false;
+japanese.enable = false;
+work.enable = false;
+#gaming.enable = false;
+#hacking.enable = false;
+#development.enable = false;
+#vpn.enable = false;
+#opensnitch.enable = false;
+#qemu.enable = false;
+#streaming.enable = false;
+#gui.enable = false;
+#airdrop.enable = false;
+#mpris.enable = false;
+#entertainment.enable = false;
+#drawing.enable = false;
+#chat.enable = false;
+#supersonic.enable = false;
+#spinner.enable = false;
 };
 }
 EOF
