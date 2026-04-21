@@ -19,6 +19,8 @@ in
   programs = {
     neovim = {
       enable = true;
+      withRuby = false;
+      withPython3 = false;
     };
     git.enable = true;
     zsh = {

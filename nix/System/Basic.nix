@@ -7,7 +7,7 @@
     tldr
     gitui
     tree
-    term-scp
+    termscp
     arp-scan
     chafa
     pfetch

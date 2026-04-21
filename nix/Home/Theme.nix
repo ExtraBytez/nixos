@@ -14,6 +14,7 @@
   };
   gtk = lib.mkIf config.windowmanager.enable {
     enable = true;
+    gtk4.theme = null;
     theme = {
       name = "catppuccin-mocha-red-standard";
       package = pkgs.catppuccin-gtk.override {
