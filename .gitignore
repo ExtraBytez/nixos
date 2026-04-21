@@ -5,6 +5,7 @@ nix/env.nix
 nix/options.nix
 nix/custom-home.nix
 nix/custom
+nix/result
 .zed
 data/abg
 data/icon.jpg
