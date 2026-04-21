@@ -28,7 +28,6 @@ in
       yt-dlp
       id3v2
       pkgs-stable.godot
-      gh
     ];
     xdg.desktopEntries = {
       "org.godotengine.Godot4.4" = {

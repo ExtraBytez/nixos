@@ -3,6 +3,7 @@
   home.packages = with pkgs; [
     fastfetch
     htop
+    gh
     zsh-powerlevel10k
     zsh-autosuggestions
     zsh-syntax-highlighting
