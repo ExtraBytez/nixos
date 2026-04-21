@@ -36,6 +36,7 @@ in
       "osu-lazer-bin"
       "slack"
       "obsidian"
+      "mdk-sdk"
     ];
 
   system.stateVersion = "25.11";

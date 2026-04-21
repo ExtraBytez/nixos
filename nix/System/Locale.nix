@@ -1,18 +1,23 @@
 { ... }:
+let
+actualUser = builtins.getEnv "SUDO_USER";
+user = if actualUser != "" then actualUser else builtins.getEnv "USER";
+env = import /home/${user}/.config/nixos/nix/env.nix;
+in
 {
-  time.timeZone = "America/Chicago";
+  time.timeZone = "${env.timezone}";
   i18n = {
-    defaultLocale = "en_US.UTF-8";
+    defaultLocale = "${env.locale}";
     extraLocaleSettings = {
-      LC_ADDRESS = "en_US.UTF-8";
-      LC_IDENTIFICATION = "en_US.UTF-8";
-      LC_MEASUREMENT = "en_US.UTF-8";
-      LC_MONETARY = "en_US.UTF-8";
-      LC_NAME = "en_US.UTF-8";
-      LC_NUMERIC = "en_US.UTF-8";
-      LC_PAPER = "en_US.UTF-8";
-      LC_TELEPHONE = "en_US.UTF-8";
-      LC_TIME = "en_US.UTF-8";
+      LC_ADDRESS = "${env.locale}";
+      LC_IDENTIFICATION = "${env.locale}";
+      LC_MEASUREMENT = "${env.locale}";
+      LC_MONETARY = "${env.locale}";
+      LC_NAME = "${env.locale}";
+      LC_NUMERIC = "${env.locale}";
+      LC_PAPER = "${env.locale}";
+      LC_TELEPHONE = "${env.locale}";
+      LC_TIME = "${env.locale}";
     };
   };
 }

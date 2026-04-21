@@ -21,6 +21,23 @@ in
 
   config = lib.mkIf config.windowmanager.enable {
     programs.hyprland.enable = true;
+    hardware.bluetooth.enable = true;
+    services.pulseaudio.enable = false;
+    services.gnome.gnome-keyring.enable = true;
+    services.displayManager = {
+      sddm = {
+        enable = true;
+        wayland.enable = true;
+        theme = "catppuccin-mocha-red";
+      };
+      defaultSession = "hyprland";
+    };
+    services.pipewire = {
+      enable = true;
+      alsa.enable = true;
+      alsa.support32Bit = true;
+      pulse.enable = true;
+    };
     environment.systemPackages = with pkgs; [
       inputs.awww.packages.${pkgs.stdenv.hostPlatform.system}.awww
       wev

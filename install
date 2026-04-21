@@ -18,24 +18,26 @@ mv ~/nixos/.gitattributes ~/.config/nixos/
 mv ~/nixos/* ~/.config/nixos/
 cat >~/.config/nixos/nix/env.nix <<EOF
 {
-  username = "Your User Name";
-  hostname = "Your Computer Name";
-  fullname = "Your Full Name";
-  ssid = "Network SSID";
-  netkey = "Network password";
-  gateway = "Network Gateway";
-  address = "Static Local IP";
-  ethinterface = "Interface for ethernet"
-  server = "Server IP";
-  dns = "DNS server";
-  domain = "Server Domain"
-  gitkey = "Forjo API key";
-  folder = "bg-folder";
-  imgbb = "imgbb api key";
+  username = "john";
+  hostname = "Workpc-1234";
+  fullname = "John Doe";
+  locale = "en_US.UTF-8";
+  timezone = "America/Chicago";
+  ssid = "Super Secret Network 1234";
+  netkey = "1234tacos";
+  gateway = "192.168.1.254";
+  address = "192.168.1.233";
+  ethinterface = "eno1"
+  server = "192.168.1.224";
+  dns = "1.1.1.1";
+  domain = "example.com"
+  gitkey = "API-123456789";
+  folder = "bg";
+  imgbb = "API-123456789";
   lockimg = "bg/yhole.jpeg";
-  wallpass = "";
-  chatpass = "";
-  musicpass = "";
+  wallpass = "pass4wallz";
+  chatpass = "pass4discord";
+  musicpass = "pass4beatz";
 }
 EOF
 nano ~/.config/nixos/nix/env.nix
@@ -70,7 +72,8 @@ japanese.enable = false;
 supersonic.enable = false;
 ytmusic.enable = false;
 work.enable = false;
-jelly.enable = true;
+jelly.enable = false;
+spinner.enable = false;
 };
 }
 EOF
