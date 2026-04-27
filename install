@@ -34,7 +34,8 @@ cat >~/.config/nixos/nix/env.nix <<EOF
   gitkey = "API-123456789";
   folder = "bg";
   imgbb = "API-123456789";
-  lockimg = "bg/yhole.jpeg";
+  resetimg = "bg/building-meteor.jpeg";
+  lockimg = "bg/wall.jpg";
   wallpass = "pass4wallz";
   chatpass = "pass4discord";
   musicpass = "pass4beatz";
