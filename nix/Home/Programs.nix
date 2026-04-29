@@ -318,8 +318,8 @@ in
           force = true;
           settings = [
             {
-              name = "Nate's Pages";
-              toolbar = true;
+              name = "undefined";
+              toolbar = false;
               bookmarks = [
               ];
             }
