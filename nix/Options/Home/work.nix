@@ -29,6 +29,7 @@ in
       pkgs.slack
       pkgs.koodo-reader
       pkgs.ungoogled-chromium
+      pkgs.inkscape
     ];
     xdg.desktopEntries = {
       slack = {
@@ -50,6 +51,11 @@ in
         name = "EReader";
         exec = "koodo-reader";
         icon = "accessories-ebook-reader";
+      };
+      "org.inkscape.Inkscape" = {
+        name = "Marking";
+        exec = "inkscape";
+        icon = "inkscape";
       };
     };
   };
