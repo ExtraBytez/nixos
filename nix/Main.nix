@@ -37,6 +37,7 @@ in
       "slack"
       "obsidian"
       "mdk-sdk"
+      "cloudflare-warp"
     ];
 
   system.stateVersion = "25.11";

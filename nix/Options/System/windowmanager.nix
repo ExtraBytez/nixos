@@ -74,6 +74,9 @@ in
       ];
     };
     services.dbus.enable = true;
+    services.cloudflare-warp = {
+      enable = true;
+    };
     home-manager.users.${username}.windowmanager.enable = true;
   };
 }
