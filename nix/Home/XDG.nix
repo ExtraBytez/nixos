@@ -14,6 +14,7 @@ in
         "x-scheme-handler/https" = [ "librewolf.desktop" ];
         "x-scheme-handler/about" = [ "librewolf.desktop" ];
         "x-scheme-handler/unknown" = [ "librewolf.desktop" ];
+        "x-scheme-handler/slack" = [ "slack.desktop" ];
       };
     };
     userDirs = {
