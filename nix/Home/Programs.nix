@@ -388,6 +388,7 @@ in
         PromptForDownloadLocation = false;
         DefaultDownloadDirectory = "/home/${env.username}";
         DisableFormHistory = true;
+        DisplayBookmarksToolbar = "Never";
       };
     };
     waybar = lib.mkIf config.windowmanager.enable {
