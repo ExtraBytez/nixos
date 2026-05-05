@@ -33,7 +33,7 @@ in
       };
     };
     home.packages = [
-      pkgs.protonvpn-gui
+      pkgs.proton-vpn
     ];
     systemd.user.services = {
       protonvpn = {
@@ -42,7 +42,7 @@ in
           After = [ "graphical-session.target" ];
         };
         Service = {
-          ExecStart = "${pkgs.protonvpn-gui}/bin/protonvpn-app --start-minimized";
+          ExecStart = "${pkgs.proton-vpn}/bin/protonvpn-app --start-minimized";
           Restart = "on-failure";
         };
         Install = {
