@@ -78,7 +78,7 @@ in
   nix.gc = {
     automatic = true;
     dates = "daily"; # or "weekly"
-    options = "--delete-older-than 0d";
+    options = "--delete-older-than 1d";
   };
 
   # Also clean old boot entries
