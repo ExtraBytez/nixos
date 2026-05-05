@@ -34,6 +34,12 @@ in
         noDisplay = true;
         categories = [ "Utility" ];
       };
+      "com.cloudflare.WarpTaskbar" = {
+        name = "Warp";
+        exec = "warp-taskbar";
+        noDisplay = true;
+        categories = [ "Network" ];
+      };
       nvim = {
         name = "nvim";
         exec = "alacritty -e nvim";
@@ -70,7 +76,6 @@ in
         exec = "zeditor";
         categories = [ "Development" ];
       };
-
     };
   };
 }
