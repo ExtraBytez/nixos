@@ -17,6 +17,7 @@ let
   # ᓚᘏᗢ
   displayName = if config.japanese.enable && Username == "Nate" then "ネイト" else Username;
   greeting = if config.japanese.enable then "こんにちは${displayName}さん" else "Hello ${displayName}";
+  passwordprompt = if config.japanese.enable then "パスワード。。。" else "Password...";
 in
 {
   options.windowmanager = {
@@ -103,7 +104,7 @@ in
             inner_color = "rgb(91, 96, 120)";
             outer_color = "rgb(0, 255, 255)";
             outline_thickness = 2;
-            placeholder_text = "<span foreground=\"##cad3f5\">Password...</span>";
+            placeholder_text = "<span foreground=\"##cad3f5\">${passwordprompt}</span>";
             shadow_passes = 2;
           }
         ];
