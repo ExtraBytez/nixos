@@ -311,7 +311,8 @@ in
               bitwarden
               mal-sync
               duolingo
-
+              noscript
+              easy-container-shortcuts
             ];
         };
         bookmarks = {
@@ -354,7 +355,7 @@ in
           "browser.toolbars.bookmarks.visibility" = "always";
           "browser.warnOnQuit" = false;
           "browser.warnOnQuitShortcut" = false;
-          "browser.fixup.dns_first_for_single_words" = true;
+          "browser.fixup.dns_first_for_single_words" = false;
           "dom.security.https_only_mode" = false;
           "media.peerconnection.ice.default_address_only" = true;
           "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
