@@ -7,6 +7,7 @@ in
 {
   wayland.windowManager.hyprland = lib.mkIf config.windowmanager.enable {
     enable = true;
+    configType = "hyprlang";
     settings = {
       monitor = ", preferred, auto, 1";
       bezier = "springy, 0.13, 0.99, 0.29, 1.1";
