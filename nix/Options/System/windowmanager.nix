@@ -39,6 +39,7 @@ in
       pulse.enable = true;
     };
     environment.systemPackages = with pkgs; [
+      inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default
       inputs.awww.packages.${pkgs.stdenv.hostPlatform.system}.awww
       wev
       brightnessctl

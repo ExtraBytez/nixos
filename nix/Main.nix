@@ -89,6 +89,10 @@ in
       "nix-command"
       "flakes"
     ];
+    extra-substituters = [ "https://noctalia.cachix.org" ];
+    extra-trusted-public-keys = [
+      "noctalia.cachix.org-1:pCOR47nnMEo5thcxNDtzWpOxNFQsBRglJzxWPp3dkU4="
+    ];
     download-buffer-size = 134217728;
     cores = 0;
     max-jobs = "auto";
