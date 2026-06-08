@@ -307,7 +307,7 @@ in
               return-youtube-dislikes
               sponsorblock
               tempmail
-              proton-vpn
+             # proton-vpn
               bitwarden
               mal-sync
               duolingo
