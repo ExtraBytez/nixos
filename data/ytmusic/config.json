@@ -96,7 +96,7 @@
       "enabled": true
     },
     "crossfade": {
-      "enabled": true
+      "enabled": false
     },
     "downloader": {
       "enabled": true
