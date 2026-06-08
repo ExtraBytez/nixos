@@ -56,7 +56,8 @@ in
         "maximize on, match:class ^(Alacritty)$"
       ];
       exec-once = [
-        "waybar"
+        #"waybar" Deprecated
+        "noctalia"
         "awww-daemon"
         "polkit-gnome-authentication-agent-1"
         "mako"
