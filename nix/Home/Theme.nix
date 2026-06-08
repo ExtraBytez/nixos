@@ -14,6 +14,7 @@
   gtk = {
     enable = true;
     gtk4.theme = null;
+    colorScheme = "dark";
     theme = {
       name = "Sweet";
       package = pkgs.sweet;
@@ -23,7 +24,6 @@
       package = pkgs.candy-icons;
     };
   };
-
   # For Qt applications (optional but recommended)
   qt = {
     enable = true;
