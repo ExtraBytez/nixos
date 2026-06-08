@@ -60,6 +60,7 @@ in
         "awww-daemon"
         "polkit-gnome-authentication-agent-1"
         "mako"
+        "warp-taskbar"
       ]
       ++ lib.optionals config.japanese.enable [
         "fcitx5"
