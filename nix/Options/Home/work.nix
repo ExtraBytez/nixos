@@ -26,17 +26,17 @@ in
   config = lib.mkIf cfg.enable {
     home.packages = [
       pkgs.obsidian
-      pkgs.slack
+      #pkgs.slack Deprecated
       pkgs.koodo-reader
       pkgs.ungoogled-chromium
       pkgs.inkscape
     ];
     xdg.desktopEntries = {
-      slack = {
-        name = "Work";
-        exec = "slack";
-        icon = "slack";
-      };
+      #slack = {
+      # name = "Work";
+      #exec = "slack";
+      #icon = "slack";
+      #};
       obsidian = {
         name = "Markdown";
         exec = "obsidian";
