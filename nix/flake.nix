@@ -18,6 +18,7 @@
     awww.url = "git+https://codeberg.org/LGFae/awww";
     wine-gdk.url = "github:fmbearmf/winegdk-nix";
     nur.url = "github:nix-community/NUR";
+    nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=latest";
     noctalia = {
       url = "github:noctalia-dev/noctalia-shell";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -33,6 +34,7 @@
       wine-gdk,
       nur,
       master,
+      nix-flatpak,
       ...
     }@inputs:
     let
@@ -65,6 +67,7 @@
         modules = [
           ./Main.nix
           home-manager.nixosModules.home-manager
+          nix-flatpak.nixosModules.nix-flatpak
         ];
       };
     };
