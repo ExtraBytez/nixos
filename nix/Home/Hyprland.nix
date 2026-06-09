@@ -102,6 +102,8 @@ in
         "$mod, B, exec, librewolf"
         "$mod, S, exec, supersonic"
         "$mod ALT, L, exec, hyprlock"
+        "$mod, L, exec, noctalia msg session lock"
+        "$mod, O, exec, noctalia msg settings-toggle"
         "$mod ALT, E, exit"
         "$mod, Q, killactive"
         "$mod CTRL, Q, forcekillactive"
