@@ -23,6 +23,15 @@ in
   };
 
   config = lib.mkIf cfg.enable {
+    programs.element-desktop.enable = true;
+    xdg.desktopEntries = {
+      "element-desktop" = {
+        name = "Chat";
+        exec = "element-desktop";
+        icon = "element-desktop";
+        categories = [ "Chat" ];
+      };
+    };
     #DISCORD DEPRECATED
     #programs.vesktop.enable = true;
     #xdg.desktopEntries = {
