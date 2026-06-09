@@ -11,7 +11,7 @@
     size = 24;
     gtk.enable = true;
   };
-  gtk = {
+  gtk = lib.mkIf config.windowmanager.enable {
     enable = true;
     gtk4.theme = null;
     colorScheme = "dark";
@@ -25,7 +25,7 @@
     };
   };
   # For Qt applications (optional but recommended)
-  qt = {
+  qt = lib.mkIf config.windowmanager.enable {
     enable = true;
     platformTheme.name = "gtk"; # Makes Qt apps follow GTK theme
   };
