@@ -27,7 +27,7 @@ in
       enable = true;
       shellAliases = {
         ns = "sudo nixos-rebuild switch --flake ~/.config/nixos/nix --no-reexec --impure --quiet";
-        nyaa = "nix run github:Beastwick18/nyaa"
+        nyaa = "nix run github:Beastwick18/nyaa";
         lcm = "sudo ip link set wlp0s20f3 down && sudo macchanger -r wlp0s20f3 && sudo ip link set wlp0s20f3 up";
         lcmp = "sudo ip link set wlp0s20f3 down && sudo macchanger -m 3e:30:12:6f:31:ec wlp0s20f3 && sudo ip link set wlp0s20f3 up";
         ba = "cat /sys/class/power_supply/BAT0/status && cat /sys/class/power_supply/BAT0/capacity";
