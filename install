@@ -59,6 +59,7 @@ ytmusic.enable = false;
 jelly.enable = false;
 japanese.enable = false;
 work.enable = false;
+editor.enable = false;
 #gaming.enable = false;
 #hacking.enable = false;
 #development.enable = false;

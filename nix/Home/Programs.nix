@@ -139,7 +139,7 @@ in
         };
       };
     };
-    zed-editor = lib.mkIf config.windowmanager.enable {
+    zed-editor = lib.mkIf (config.windowmanager.enable && config.editor.enable) {
       enable = true;
       extraPackages = [
         pkgs-stable.nixd
@@ -308,7 +308,7 @@ in
               return-youtube-dislikes
               sponsorblock
               tempmail
-             # proton-vpn
+              # proton-vpn
               bitwarden
               mal-sync
               duolingo
