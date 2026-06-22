@@ -71,7 +71,7 @@ in
         exec = "librewolf";
         categories = [ "Network" ];
       };
-      "dev.zed.Zed" = {
+      "dev.zed.Zed" = lib.mkIf config.editor.enable {
         name = "Editor";
         icon = "zed";
         exec = "zeditor";
