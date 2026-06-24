@@ -17,6 +17,7 @@ in
       "bluetooth"
       "libvirtd"
       "wireshark"
+      "dialout"
     ];
   };
 }
