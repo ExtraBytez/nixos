@@ -111,6 +111,7 @@ in
     };
     home.packages = with pkgs; [
       bitwarden-desktop
+      ntfy-sh
       hyprpicker
       alacritty
       nerd-fonts.jetbrains-mono

@@ -48,6 +48,9 @@ in
         "ignore_alpha 0, match:namespace waybar"
       ];
       windowrule = [
+        "no_blur on, match:class ^(osu!)$"
+        "opacity 0.70 0.70, match:focus 0"
+        "opacity 0.90 0.90, match:focus 1"
         "opacity 0.95 0.95, match:class ^(Alacritty)$"
         "opacity 0.70 0.70, match:class ^(Alacritty)$, match:focus 0"
         "maximize on, match:class ^(Alacritty)$"
@@ -56,6 +59,8 @@ in
         "noctalia"
         "awww-daemon"
         "warp-taskbar"
+        "bitwarden"
+        #"ntfy script"
       ]
       ++ lib.optionals config.japanese.enable [
         "fcitx5"
