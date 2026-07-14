@@ -5,7 +5,8 @@ mv ~/nixos/.git ~/.config/nixos/
 mv ~/nixos/.gitignore ~/.config/nixos/
 mv ~/nixos/.gitattributes ~/.config/nixos/
 mv ~/nixos/* ~/.config/nixos/
-cat >~/.config/nixos/nix/env.nix <<EOF
+mkdir ~/.config/nixos/nix/Generated
+cat >~/.config/nixos/nix/Generated/env.nix <<EOF
 {
   username = "john";
   hostname = "Workpc-1234";
@@ -35,9 +36,9 @@ echo "{ ... }: {}" >~/.config/nixos/nix/custom.nix
 echo "{ ... }: {}" >~/.config/nixos/nix/custom-home.nix
 rmdir ~/nixos ~/Desktop ~/Documents ~/Downloads ~/Music ~/Pictures ~/Public ~/Templates ~/Videos 2>/dev/null
 rm ~/.config/user-dirs.dirs 2>/dev/null
-sudo mv /etc/nixos/hardware-configuration.nix ~/.config/nixos/nix/hardware.nix
+sudo mv /etc/nixos/hardware-configuration.nix ~/.config/nixos/nix/Generated/hardware.nix
 sudo rm -rf /etc/nixos/
-cat >~/.config/nixos/nix/options.nix <<EOF
+cat >~/.config/nixos/nix/Generated/options.nix <<EOF
 { ... }:
 {
 config = {

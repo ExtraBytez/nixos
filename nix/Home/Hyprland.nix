@@ -2,7 +2,7 @@
 let
   actualUser = builtins.getEnv "SUDO_USER";
   user = if actualUser != "" then actualUser else builtins.getEnv "USER";
-  env = import /home/${user}/.config/nixos/nix/env.nix;
+  env = import /home/${user}/.config/nixos/nix/Generated/env.nix;
 in
 {
   wayland.windowManager.hyprland = lib.mkIf config.windowmanager.enable {
@@ -48,9 +48,6 @@ in
         "ignore_alpha 0, match:namespace waybar"
       ];
       windowrule = [
-        "no_blur on, match:class ^(osu!)$"
-        "opacity 0.70 0.70, match:focus 0"
-        "opacity 0.90 0.90, match:focus 1"
         "opacity 0.95 0.95, match:class ^(Alacritty)$"
         "opacity 0.70 0.70, match:class ^(Alacritty)$, match:focus 0"
         "maximize on, match:class ^(Alacritty)$"
@@ -92,9 +89,7 @@ in
         "$mod ALT, COMMA, exec, alacritty -e bluetoothctl"
         "$mod, T, exec, alacritty"
         "$mod, D, exec, fuzzel"
-        "$mod, Z, exec, zeditor"
         "$mod, B, exec, librewolf"
-        "$mod, S, exec, supersonic"
         "$mod ALT, L, exec, hyprlock"
         "$mod, L, exec, noctalia msg session lock"
         "$mod, O, exec, noctalia msg settings-toggle"
@@ -123,10 +118,6 @@ in
         "$mod SHIFT, 8, movetoworkspace, 8"
         "$mod SHIFT, 9, movetoworkspace, 9"
         "$mod, R, submap, resize"
-      ];
-      binde = [
-        "$mod, up, exec, zsh /home/${env.username}/.config/nixos/data/hyprland/workspaces.zsh --input=up"
-        "$mod, down, exec, zsh /home/${env.username}/.config/nixos/data/hyprland/workspaces.zsh --input=down"
       ];
       bindle = [
         "Ctrl, XF86AudioPlay, exec, playerctl previous"

@@ -2,7 +2,7 @@
 
 let
   user = let u = builtins.getEnv "SUDO_USER"; in if u != "" then u else builtins.getEnv "USER";
-  env = import /home/${user}/.config/nixos/nix/env.nix;
+  env = import /home/${user}/.config/nixos/nix/Generated/env.nix;
 
   ipv4 = let
     common = {

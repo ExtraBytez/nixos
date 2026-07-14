@@ -12,16 +12,16 @@
 let
   actualUser = builtins.getEnv "SUDO_USER";
   user = if actualUser != "" then actualUser else builtins.getEnv "USER";
-  env = import /home/${user}/.config/nixos/nix/env.nix;
+  env = import /home/${user}/.config/nixos/nix/Generated/env.nix;
   username = env.username;
   hostname = env.hostname;
 in
 {
   # Primary imports — including your options module
   imports = [
-    (import /home/${username}/.config/nixos/nix/hardware.nix)
+    (import /home/${username}/.config/nixos/nix/Generated/hardware.nix)
     (import /home/${username}/.config/nixos/nix/custom.nix)
-    /home/${username}/.config/nixos/nix/options.nix # ← This enables hello.enable, etc.
+    /home/${username}/.config/nixos/nix/Generated/options.nix # ← This enables hello.enable, etc.
     ./Options/System
     ./System
   ];

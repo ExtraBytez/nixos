@@ -13,14 +13,12 @@
     pfetch
     playerctl
     cava
-    yazi
     p7zip
     ffmpeg
     caligula
     duf
     dust
     eza
-    lolcat
     killall
     unzip
     wget

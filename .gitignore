@@ -1,12 +1,5 @@
-nix/hardware-configuration.nix
-nix/hardware.nix
+nix/Generated/hardware.nix
 nix/custom.nix
-nix/env.nix
-nix/options.nix
+nix/Generated/env.nix
+nix/Generated/options.nix
 nix/custom-home.nix
-nix/custom
-nix/result
-.zed
-data/abg
-data/icon.jpg
-data/custom

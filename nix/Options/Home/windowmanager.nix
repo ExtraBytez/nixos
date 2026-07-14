@@ -9,7 +9,7 @@
 let
   actualUser = builtins.getEnv "SUDO_USER";
   user = if actualUser != "" then actualUser else builtins.getEnv "USER";
-  env = import /home/${user}/.config/nixos/nix/env.nix;
+  env = import /home/${user}/.config/nixos/nix/Generated/env.nix;
   username = env.username;
   Username =
     (lib.toUpper (lib.substring 0 1 username)) + (lib.substring 1 (lib.stringLength username) username);
