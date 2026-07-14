@@ -1,4 +1,3 @@
-TEST
 # こんにちは!
 ## Install NixOS -> Reboot -> Run:
 ```bash
