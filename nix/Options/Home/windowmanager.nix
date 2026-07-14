@@ -1,4 +1,3 @@
-# nix/home-modules/hello.nix
 {
   config,
   lib,

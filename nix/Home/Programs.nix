@@ -1,7 +1,5 @@
 {
   pkgs,
-  nur,
-  pkgs-stable,
   config,
   lib,
   ...
@@ -13,6 +11,30 @@ let
 in
 {
   programs = {
+  vscodium = {
+    enable = true;
+    
+    profiles.default = {
+      userSettings = {
+        "nix.enableLanguageServer" = true;
+        "nix.serverPath" = "nixd";
+
+        "nix.serverSettings".nixd = {
+          formatting.command = [ "${pkgs.nixfmt}/bin/nixfmt" ];
+          
+          "options" = {
+            # NixOS Options
+            # Replace "your-actual-hostname" with the value of env.hostname
+            nixos.expr = ''(builtins.getFlake "/home/${env.username}/.config/nixos/nix").nixosConfigurations."${env.hostname}".options'';
+
+            # Home Manager Options (Integrated via NixOS module)
+            # Replace "{$env.username"" and "{$env.hostname}"
+            home-manager.expr = ''(builtins.getFlake "/home/${env.username}/.config/nixos/nix").nixosConfigurations."${env.hostname}".options.home-manager.users.type.getSubOptions []'';
+          };
+        };
+      };
+    };
+  };
     zsh = {
       enable = true;
       shellAliases = {
@@ -193,62 +215,62 @@ in
         };
       };
       policies = {
-        "Containers"= {
+        "Containers" = {
           "Default" = [
-          {
-          "name"= "1";
-          "icon"= "fingerprint";
-          "color"= "blue";
-          }
-          {
-            "name"= "2";
-            "icon"= "fingerprint";
-            "color"= "turquoise";
-          }
-          {
-            "name"= "3";
-            "icon"= "fingerprint";
-            "color"= "green";
-          }
-          {
-            "name"= "4";
-            "icon"= "fingerprint";
-            "color"= "yellow";
-          }
-          {
-            "name"= "5";
-            "icon"= "fingerprint";
-            "color"= "orange";
-          }
-          {
-            "name"= "6";
-            "icon"= "fingerprint";
-            "color"= "red";
-          }
-          {
-            "name"= "7";
-            "icon"= "fingerprint";
-            "color"= "pink";
-          }
-          {
-            "name"= "8";
-            "icon"= "fingerprint";
-            "color"= "purple";
-          }
-          {
-            "name"= "9";
-            "icon"= "fingerprint";
-            "color"= "toolbar";
-          }
+            {
+              "name" = "1";
+              "icon" = "fingerprint";
+              "color" = "blue";
+            }
+            {
+              "name" = "2";
+              "icon" = "fingerprint";
+              "color" = "turquoise";
+            }
+            {
+              "name" = "3";
+              "icon" = "fingerprint";
+              "color" = "green";
+            }
+            {
+              "name" = "4";
+              "icon" = "fingerprint";
+              "color" = "yellow";
+            }
+            {
+              "name" = "5";
+              "icon" = "fingerprint";
+              "color" = "orange";
+            }
+            {
+              "name" = "6";
+              "icon" = "fingerprint";
+              "color" = "red";
+            }
+            {
+              "name" = "7";
+              "icon" = "fingerprint";
+              "color" = "pink";
+            }
+            {
+              "name" = "8";
+              "icon" = "fingerprint";
+              "color" = "purple";
+            }
+            {
+              "name" = "9";
+              "icon" = "fingerprint";
+              "color" = "toolbar";
+            }
           ];
         };
-        "Extensions"= {
-      "Install"= [
-        "https://addons.mozilla.org/firefox/downloads/file/4875950/bitwarden_password_manager-2026.6.1.xpi"
-        "https://addons.mozilla.org/firefox/downloads/file/4851750/proton_vpn_firefox_extension-1.3.5.xpi"
-        "https://addons.mozilla.org/firefox/downloads/file/4897574/sponsorblock-6.1.7.xpi"
-        "https://addons.mozilla.org/firefox/downloads/file/4773733/user_agent_string_switcher-0.6.7.xpi"
-      ];
+        "Extensions" = {
+          "Install" = [
+            "https://addons.mozilla.org/firefox/downloads/file/4875950/bitwarden_password_manager-2026.6.1.xpi"
+            "https://addons.mozilla.org/firefox/downloads/file/4851750/proton_vpn_firefox_extension-1.3.5.xpi"
+            "https://addons.mozilla.org/firefox/downloads/file/4897574/sponsorblock-6.1.7.xpi"
+            "https://addons.mozilla.org/firefox/downloads/file/4773733/user_agent_string_switcher-0.6.7.xpi"
+          ];
         };
         SearchEngines = {
           Add = [

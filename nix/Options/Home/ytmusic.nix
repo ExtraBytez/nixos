@@ -1,4 +1,3 @@
-# nix/home-modules/ytmusic.nix
 {
   config,
   lib,
