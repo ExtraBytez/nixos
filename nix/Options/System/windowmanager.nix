@@ -54,7 +54,6 @@ in
         fontSize = "9";
         loginBackground = false;
       })
-      mako
       libnotify
       adwaita-qt
       adwaita-qt6
@@ -62,19 +61,11 @@ in
       fira-code
       font-awesome
       material-design-icons
-      polkit_gnome
       zenity
     ];
     services.dbus.packages = with pkgs; [
       libappindicator-gtk3
     ];
-    xdg.portal = {
-      enable = true;
-      extraPortals = [
-        pkgs.xdg-desktop-portal-hyprland
-      ];
-    };
-    services.dbus.enable = true;
     services.cloudflare-warp = {
       enable = true;
     };

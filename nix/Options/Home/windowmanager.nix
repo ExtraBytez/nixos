@@ -133,10 +133,6 @@ in
         gradient_color_7 = '#eba0ac'
         gradient_color_8 = '#f38ba8'
       '';
-      ".config/waybar" = {
-        source = ../../../data/waybar;
-        recursive = true;
-      };
     };
   };
 }

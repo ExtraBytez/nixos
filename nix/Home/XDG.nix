@@ -14,7 +14,6 @@ in
         "x-scheme-handler/https" = [ "librewolf.desktop" ];
         "x-scheme-handler/about" = [ "librewolf.desktop" ];
         "x-scheme-handler/unknown" = [ "librewolf.desktop" ];
-        "x-scheme-handler/slack" = [ "slack.desktop" ];
       };
     };
     userDirs = {
@@ -41,12 +40,6 @@ in
         noDisplay = true;
         categories = [ "Network" ];
       };
-      nvim = {
-        name = "nvim";
-        exec = "alacritty -e nvim";
-        noDisplay = true;
-        categories = [ "Utility" ];
-      };
       nixos-manual = {
         name = "Nixos Manual";
         exec = "nixos-help";
@@ -70,12 +63,6 @@ in
         icon = "librewolf";
         exec = "librewolf";
         categories = [ "Network" ];
-      };
-      "dev.zed.Zed" = lib.mkIf config.editor.enable {
-        name = "Editor";
-        icon = "zed";
-        exec = "zeditor";
-        categories = [ "Development" ];
       };
     };
   };

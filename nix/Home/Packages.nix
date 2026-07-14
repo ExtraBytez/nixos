@@ -4,6 +4,7 @@
     fastfetch
     htop
     gh
+    git
     zsh-powerlevel10k
     zsh-autosuggestions
     zsh-syntax-highlighting

@@ -7,6 +7,7 @@
 {
   home.pointerCursor = lib.mkIf config.windowmanager.enable {
     package = pkgs.catppuccin-cursors.mochaRed;
+    enable = true;
     name = "catppuccin-mocha-red-cursors";
     size = 24;
     gtk.enable = true;
@@ -27,6 +28,6 @@
   # For Qt applications (optional but recommended)
   qt = lib.mkIf config.windowmanager.enable {
     enable = true;
-    platformTheme.name = "gtk"; # Makes Qt apps follow GTK theme
+    platformTheme.name = "gtk2"; # Makes Qt apps follow GTK theme
   };
 }
