@@ -223,7 +223,7 @@ in
           "extensions.activeThemeID" = "firefox-alpenglow@mozilla.org";
           "layout.css.prefers-color-scheme.content-override" = 0;
           "privacy.userContext.newTabContainerOnLeftClick.enabled" = true;
-          "browser.startup.homepage" = "https://dashboard.pelmel.net";
+          "browser.startup.homepage" = "https://dashboard.${env.domain}";
         };
       };
       policies = {
