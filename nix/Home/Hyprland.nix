@@ -60,7 +60,6 @@ in
         "awww-daemon"
         "warp-taskbar"
         "bitwarden"
-        #"ntfy script"
       ]
       ++ lib.optionals config.japanese.enable [
         "fcitx5"
