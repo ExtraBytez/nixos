@@ -12,17 +12,7 @@ let
   env = import /home/${user}/.config/nixos/nix/env.nix;
 in
 {
-  home.file.".config/nvim" = {
-    source = ../../data/nvim;
-    recursive = true;
-  };
   programs = {
-    neovim = {
-      enable = true;
-      withRuby = false;
-      withPython3 = false;
-    };
-    git.enable = true;
     zsh = {
       enable = true;
       shellAliases = {
@@ -139,194 +129,10 @@ in
         };
       };
     };
-    zed-editor = lib.mkIf (config.windowmanager.enable && config.editor.enable) {
-      enable = true;
-      extraPackages = [
-        pkgs-stable.nixd
-        pkgs-stable.ruff
-        pkgs-stable.ty
-        pkgs.nixfmt
-        pkgs-stable.shellcheck
-        pkgs-stable.shfmt
-        pkgs-stable.rustfmt
-      ];
-      extensions = [
-        "nix"
-        "toml"
-        "HTML"
-        "catppuccin"
-        "catppuccin-icons"
-        "gdscript"
-        "basher"
-      ];
-      userSettings = {
-        buffer_font_family = "JetBrainsMonoNL Nerd Font Propo";
-        ui_font_family = "JetBrainsMonoNL Nerd Font Propo";
-        disable_ai = true;
-        terminal = {
-          font_family = "JetBrainsMonoNL Nerd Font Propo";
-        };
-        title_bar = {
-          show_user_picture = true;
-          show_onboarding_banner = true;
-          show_project_items = true;
-          show_branch_name = false;
-          show_branch_icon = false;
-          show_sign_in = false;
-        };
-        status_bar = {
-          cursor_position_button = false;
-          active_language_button = false;
-        };
-        notification_panel = {
-          button = false;
-        };
-        collaboration_panel = {
-          button = false;
-        };
-        outline_panel = {
-          button = false;
-        };
-        debugger = {
-          button = false;
-        };
-        search = {
-          button = true;
-        };
-        terminal = {
-          button = false;
-        };
-        diagnostics = {
-          button = false;
-        };
-        theme = {
-          mode = "dark";
-          dark = "Catppuccin Mocha";
-          light = "Catppuccin Mocha";
-        };
-        icon_theme = "Catppuccin Mocha";
-
-        lsp = {
-          nixd = {
-            settings = {
-              nixpkgs.expr = "import <nixpkgs> { }";
-              formatting.command = [ "${pkgs.nixfmt}/bin/nixfmt" ];
-              options = {
-                nixos.expr = "(builtins.getFlake (builtins.toString /home/${env.username}/.config/nixos/nix)).nixosConfigurations.${env.hostname}.options";
-                home_manager.expr = "(builtins.getFlake (builtins.toString /home/${env.username}/.config/nixos/nix)).nixosConfigurations.${env.hostname}.options.home-manager.users.type.getSubOptions []";
-              };
-            };
-          };
-          bash-language-server = {
-            initialization_options = {
-              shellcheckPath = "${pkgs.shellcheck}/bin/shellcheck";
-            };
-          };
-          ty = {
-            initialization_options = { };
-          };
-          ruff = {
-            initialization_options = {
-              settings = {
-                lineLength = 88;
-                lint = {
-                  extendSelect = [ "I" ];
-                };
-              };
-            };
-          };
-        };
-        languages = {
-          Nix = {
-            language_servers = [
-              "nixd"
-              "!nil"
-            ];
-          };
-          "Shell Script" = {
-            language_servers = [ "bash-language-server" ];
-            format_on_save = "on";
-            formatter = {
-              external = {
-                command = "${pkgs.shfmt}/bin/shfmt";
-                arguments = [
-                  "-i"
-                  "2"
-                ];
-              };
-            };
-          };
-          Python = {
-            language_servers = [
-              "ty"
-              "ruff"
-            ];
-            format_on_save = "on";
-            formatter = [
-              { code_action = "source.fixAll.ruff"; }
-              { code_action = "source.organizeImports.ruff"; }
-              {
-                language_server = {
-                  name = "ruff";
-                };
-              }
-            ];
-          };
-        };
-      };
-    };
     librewolf = lib.mkIf config.windowmanager.enable {
       enable = true;
       profiles.default = {
         id = 0;
-        extensions = {
-          force = true;
-          packages =
-            let
-              nurPkgs = import nur { inherit pkgs; };
-              tempmail = pkgs.fetchFirefoxAddon {
-                name = "tempmail";
-                url = "https://addons.mozilla.org/firefox/downloads/file/3990577/temp_mail-0.0.34.xpi";
-                sha256 = "VM++yOpKesXpsZ/t9cwYOdJ+eAH2rLACgVgFmT21hhU=";
-              };
-              duolingo = pkgs.fetchFirefoxAddon {
-                name = "duolingo-unlimited-hearts";
-                url = "https://addons.mozilla.org/firefox/downloads/file/4625755/duolingo_unlimited_hearts-3.4.1.xpi";
-                sha256 = "JaAYfGYFVl8OfWRI62f72x6e/EPKFPlhwcARSCy4pjQ=";
-              };
-              theme = pkgs.fetchFirefoxAddon {
-                name = "theme";
-                url = "https://addons.mozilla.org/firefox/downloads/file/4160061/catppuccin_indigo-1.0.xpi";
-                sha256 = "zdSt2w7ROoWLjZRZdLoJMXlHnjz5t7i0uxSIwQlNq/w=";
-              };
-            in
-            with nurPkgs.repos.rycee.firefox-addons;
-            [
-              theme
-              violentmonkey
-              darkreader
-              return-youtube-dislikes
-              sponsorblock
-              tempmail
-              # proton-vpn
-              bitwarden
-              mal-sync
-              duolingo
-              noscript
-              easy-container-shortcuts
-            ];
-        };
-        bookmarks = {
-          force = true;
-          settings = [
-            {
-              name = "undefined";
-              toolbar = false;
-              bookmarks = [
-              ];
-            }
-          ];
-        };
         settings = {
           "privacy.fingerprintingProtection.overrides" =
             "+AllTargets,-CSSPrefersColorScheme,-CSSPrefersReducedTransparency";
@@ -391,9 +197,6 @@ in
         DisableFormHistory = true;
         DisplayBookmarksToolbar = "Never";
       };
-    };
-    waybar = lib.mkIf config.windowmanager.enable {
-      enable = true;
     };
   };
 }

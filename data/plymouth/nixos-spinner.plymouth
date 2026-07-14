@@ -1,8 +1,0 @@
-[Plymouth Theme]
-Name=NixOS Spinner
-Description=NixOS boot splash with Windows-style spinner
-ModuleName=script
-
-[script]
-ImageDir=/etc/plymouth/themes/nixos-spinner
-ScriptFile=/etc/plymouth/themes/nixos-spinner/nixos-spinner.script

@@ -24,25 +24,5 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    home.packages = with pkgs; [
-      yt-dlp
-      id3v2
-      pkgs-stable.godot
-    ];
-    xdg.desktopEntries = {
-      "org.godotengine.Godot4.4" = {
-        name = "GameDev";
-        icon = "godot";
-        exec = "godot";
-        categories = [ "Development" ];
-      };
-      github = {
-        name = "Storage";
-        exec = "";
-        icon = "github-desktop";
-        categories = [ "Development" ];
-        noDisplay = true;
-      };
-    };
   };
 }

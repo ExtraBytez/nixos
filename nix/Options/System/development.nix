@@ -23,7 +23,6 @@ in
     environment.systemPackages = with pkgs; [
       docker
       docker-compose
-      gcc
     ];
     virtualisation.docker.enable = true;
     home-manager.users.${username}.development.enable = true;
