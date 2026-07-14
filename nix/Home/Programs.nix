@@ -68,10 +68,11 @@ in
         server = "ssh ${env.username}@${env.server}";
       };
       initContent = ''
+                export PATH="$HOME/.local/bin:$PATH"
                 rm -dfr ~/Downloads
                 rm -dfr ~/.zsh_history
                 pfetch
-        	source ${pkgs.zsh-autosuggestions}/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+        	      source ${pkgs.zsh-autosuggestions}/share/zsh-autosuggestions/zsh-autosuggestions.zsh
                 source ${pkgs.zsh-syntax-highlighting}/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
                 source ${pkgs.zsh-history-substring-search}/share/zsh-history-substring-search/zsh-history-substring-search.zsh
                 source ${pkgs.fzf}/share/fzf/key-bindings.zsh
