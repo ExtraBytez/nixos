@@ -134,41 +134,122 @@ in
       profiles.default = {
         id = 0;
         settings = {
-          "privacy.fingerprintingProtection.overrides" =
-            "+AllTargets,-CSSPrefersColorScheme,-CSSPrefersReducedTransparency";
           "browser.display.use_document_fonts" = 0;
-          "privacy.resistFingerprinting" = true;
-          "browser.policies.runOncePerModification.setDefaultSearchEngine" = "StartPage";
-          "browser.search.separatePrivateDefault" = false;
+          "privacy.fingerprintingProtection.overrides" = "+AllTargets,-CSSPrefersColorScheme";
+          "privacy.fingerprintingProtection" = true;
+          "privacy.resistFingerprinting" = false;
+          "browser.warnOnQuit" = false;
+          "browser.warnOnQuitShortcut" = false;
+          "dom.security.https_only_mode" = false;
+          "media.peerconnection.ice.default_address_only" = true;
+          "browser.toolbars.bookmarks.visibility" = "never";
+          "privacy.clearHistory.browsingHistoryAndDownloads" = true;
+          "privacy.clearHistory.cache" = true;
+          "privacy.clearHistory.cookiesAndStorage" = true;
           "privacy.clearHistory.formdata" = true;
+          "privacy.clearHistory.historyFormDataAndDownloads" = true;
           "privacy.clearHistory.siteSettings" = true;
+          "privacy.clearOnShutdown.cache" = true;
+          "privacy.clearOnShutdown.cookies" = true;
           "privacy.clearOnShutdown.downloads" = true;
+          "privacy.clearOnShutdown.formdata" = true;
           "privacy.clearOnShutdown.history" = true;
           "privacy.clearOnShutdown.offlineApps" = true;
           "privacy.clearOnShutdown.openWindows" = true;
+          "privacy.clearOnShutdown.sessions" = true;
           "privacy.clearOnShutdown.siteSettings" = true;
           "privacy.clearOnShutdown_v2.browsingHistoryAndDownloads" = true;
+          "privacy.clearOnShutdown_v2.cache" = true;
+          "privacy.clearOnShutdown_v2.cookiesAndStorage" = true;
           "privacy.clearOnShutdown_v2.formdata" = true;
           "privacy.clearOnShutdown_v2.historyFormDataAndDownloads" = true;
           "privacy.clearOnShutdown_v2.siteSettings" = true;
           "privacy.clearSiteData.browsingHistoryAndDownloads" = true;
+          "privacy.clearSiteData.cache" = true;
+          "privacy.clearSiteData.cookiesAndStorage" = true;
           "privacy.clearSiteData.formdata" = true;
           "privacy.clearSiteData.historyFormDataAndDownloads" = true;
           "privacy.clearSiteData.siteSettings" = true;
-          "browser.search.defaultenginename" = "StartPage";
-          "browser.search.order.1" = "StartPage";
-          "browser.search.selectedEngine" = "StartPage";
-          "browser.urlbar.placeholderName" = "StartPage";
-          "browser.toolbars.bookmarks.visibility" = "always";
-          "browser.warnOnQuit" = false;
-          "browser.warnOnQuitShortcut" = false;
-          "browser.fixup.dns_first_for_single_words" = false;
-          "dom.security.https_only_mode" = false;
-          "media.peerconnection.ice.default_address_only" = true;
-          "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
+          "privacy.clearSiteDataHeader.cache.bfcache.enabled" = true;
+          "privacy.clearSiteDataHeader.cache.enabled" = true;
+          "services.sync.prefs.sync.privacy.clearOnShutdown.cache" = true;
+          "services.sync.prefs.sync.privacy.clearOnShutdown.cookies" = true;
+          "services.sync.prefs.sync.privacy.clearOnShutdown.downloads" = true;
+          "services.sync.prefs.sync.privacy.clearOnShutdown.formdata" = true;
+          "services.sync.prefs.sync.privacy.clearOnShutdown.history" = true;
+          "services.sync.prefs.sync.privacy.clearOnShutdown.offlineApps" = true;
+          "services.sync.prefs.sync.privacy.clearOnShutdown.sessions" = true;
+          "services.sync.prefs.sync.privacy.clearOnShutdown.siteSettings" = true;
+          "services.sync.prefs.sync.privacy.clearOnShutdown_v2.browsingHistoryAndDownloads" = true;
+          "services.sync.prefs.sync.privacy.clearOnShutdown_v2.cache" = true;
+          "services.sync.prefs.sync.privacy.clearOnShutdown_v2.cookiesAndStorage" = true;
+          "services.sync.prefs.sync.privacy.clearOnShutdown_v2.downloads" = true;
+          "services.sync.prefs.sync.privacy.clearOnShutdown_v2.formdata" = true;
+          "services.sync.prefs.sync.privacy.clearOnShutdown_v2.historyFormDataAndDownloads" = true;
+          "services.sync.prefs.sync.privacy.clearOnShutdown_v2.siteSettings" = true;
+          "extensions.activeThemeID" = "firefox-alpenglow@mozilla.org";
+          "layout.css.prefers-color-scheme.content-override" = 0;
+          "privacy.userContext.newTabContainerOnLeftClick.enabled" = true;
         };
       };
       policies = {
+        "Containers"= {
+          "Default" = [
+          {
+          "name"= "1";
+          "icon"= "fingerprint";
+          "color"= "blue";
+          }
+          {
+            "name"= "2";
+            "icon"= "fingerprint";
+            "color"= "turquoise";
+          }
+          {
+            "name"= "3";
+            "icon"= "fingerprint";
+            "color"= "green";
+          }
+          {
+            "name"= "4";
+            "icon"= "fingerprint";
+            "color"= "yellow";
+          }
+          {
+            "name"= "5";
+            "icon"= "fingerprint";
+            "color"= "orange";
+          }
+          {
+            "name"= "6";
+            "icon"= "fingerprint";
+            "color"= "red";
+          }
+          {
+            "name"= "7";
+            "icon"= "fingerprint";
+            "color"= "pink";
+          }
+          {
+            "name"= "8";
+            "icon"= "fingerprint";
+            "color"= "purple";
+          }
+          {
+            "name"= "9";
+            "icon"= "fingerprint";
+            "color"= "toolbar";
+          }
+          ];
+        };
+        "Extensions"= {
+      "Install"= [
+        "https://addons.mozilla.org/firefox/downloads/file/4875950/bitwarden_password_manager-2026.6.1.xpi"
+        "https://addons.mozilla.org/firefox/downloads/file/4851750/proton_vpn_firefox_extension-1.3.5.xpi"
+        "https://addons.mozilla.org/firefox/downloads/file/4897574/sponsorblock-6.1.7.xpi"
+        "https://addons.mozilla.org/firefox/downloads/file/4773733/user_agent_string_switcher-0.6.7.xpi"
+      ];
+        };
         SearchEngines = {
           Add = [
             {
@@ -190,8 +271,6 @@ in
         DownloadDirectory = "/home/${env.username}";
         PromptForDownloadLocation = false;
         DefaultDownloadDirectory = "/home/${env.username}";
-        DisableFormHistory = true;
-        DisplayBookmarksToolbar = "Never";
       };
     };
   };
