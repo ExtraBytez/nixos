@@ -282,6 +282,7 @@ in
             "https://addons.mozilla.org/firefox/downloads/file/4851750/proton_vpn_firefox_extension-1.3.5.xpi"
             "https://addons.mozilla.org/firefox/downloads/file/4897574/sponsorblock-6.1.7.xpi"
             "https://addons.mozilla.org/firefox/downloads/file/4773733/user_agent_string_switcher-0.6.7.xpi"
+            "https://addons.mozilla.org/firefox/downloads/file/4830363/violentmonkey-2.41.0.xpi"
           ];
         };
         SearchEngines = {
