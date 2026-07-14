@@ -26,8 +26,7 @@
   };
 
   outputs =
-    {
-      self,
+    { self,
       nixpkgs,
       nixpkgs-stable,
       home-manager,
@@ -35,13 +34,13 @@
       nur,
       master,
       nix-flatpak,
-      ...
-    }@inputs:
+      ... }@inputs:
     let
       system = "x86_64-linux";
-      actualUser = builtins.getEnv "SUDO_USER";
-      user = if actualUser != "" then actualUser else builtins.getEnv "USER";
-      env = import /home/${user}/.config/nixos/nix/env.nix;
+      username = "nate";
+      hostname = "roswaal";
+      env = import ./env.nix;
+
       pkgs-stable = import nixpkgs-stable {
         inherit system;
         config.allowUnfree = true;
@@ -52,7 +51,7 @@
       };
     in
     {
-      nixosConfigurations.${env.hostname} = nixpkgs.lib.nixosSystem {
+      nixosConfigurations.${hostname} = nixpkgs.lib.nixosSystem {
         inherit system;
         specialArgs = {
           inherit
@@ -61,6 +60,7 @@
             pkgs-master
             nur
             wine-gdk
+            env
             ;
           winegdk = wine-gdk.packages.${system}.default;
         };

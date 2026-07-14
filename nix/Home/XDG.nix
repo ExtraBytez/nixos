@@ -1,9 +1,4 @@
-{ lib, config, ... }:
-let
-  actualUser = builtins.getEnv "SUDO_USER";
-  user = if actualUser != "" then actualUser else builtins.getEnv "USER";
-  env = import /home/${user}/.config/nixos/nix/env.nix;
-in
+{ lib, config, env, ... }:
 {
   xdg = lib.mkIf config.windowmanager.enable {
     mimeApps = {
@@ -19,14 +14,14 @@ in
     };
     userDirs = {
       createDirectories = false;
-      desktop = /home/${env.username};
-      download = /home/${env.username};
-      templates = /home/${env.username};
-      publicShare = /home/${env.username};
-      documents = /home/${env.username};
-      music = /home/${env.username};
-      pictures = /home/${env.username};
-      videos = /home/${env.username};
+      desktop = "/home/${env.username}";
+      download = "/home/${env.username}";
+      templates = "/home/${env.username}";
+      publicShare = "/home/${env.username}";
+      documents = "/home/${env.username}";
+      music = "/home/${env.username}";
+      pictures = "/home/${env.username}";
+      videos = "/home/${env.username}";
     };
     desktopEntries = lib.mkIf config.windowmanager.enable {
       yazi = {

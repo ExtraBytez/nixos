@@ -1,9 +1,5 @@
-{ lib, config, ... }:
-
+{ pkgs, lib, config, env, ... }:
 let
-  user = let u = builtins.getEnv "SUDO_USER"; in if u != "" then u else builtins.getEnv "USER";
-  env = import /home/${user}/.config/nixos/nix/env.nix;
-
   ipv4 = let
     common = {
       dns = env.dns;

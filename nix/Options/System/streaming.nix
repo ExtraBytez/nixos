@@ -1,13 +1,7 @@
-{
-  config,
-  lib,
-  ...
-}:
+{ config, lib, env, pkgs, pkgs-stable, pkgs-master, inputs, ... }:
 
 let
-  actualUser = builtins.getEnv "SUDO_USER";
-  user = if actualUser != "" then actualUser else builtins.getEnv "USER";
-  env = import /home/${user}/.config/nixos/nix/env.nix;
+  cfg = config.streaming;
   username = env.username;
 in
 {

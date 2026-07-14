@@ -1,83 +1,95 @@
-clear
-nix-shell -p lolcat --run
-"""
-lolcat <<"EOF"
-███    ██  █████  ████████ ███████ ███████     ███    ██ ██ ██   ██  ██████  ███████     ██ ███    ██ ███████ ████████  █████  ██      ██      ███████ ██████
-████   ██ ██   ██    ██    ██      ██          ████   ██ ██  ██ ██  ██    ██ ██          ██ ████   ██ ██         ██    ██   ██ ██      ██      ██      ██   ██
-██ ██  ██ ███████    ██    █████   ███████     ██ ██  ██ ██   ███   ██    ██ ███████     ██ ██ ██  ██ ███████    ██    ███████ ██      ██      █████   ██████
-██  ██ ██ ██   ██    ██    ██           ██     ██  ██ ██ ██  ██ ██  ██    ██      ██     ██ ██  ██ ██      ██    ██    ██   ██ ██      ██      ██      ██   ██
-██   ████ ██   ██    ██    ███████ ███████     ██   ████ ██ ██   ██  ██████  ███████     ██ ██   ████ ███████    ██    ██   ██ ███████ ███████ ███████ ██   ██
+#!/usr/bin/env bash
+set -euo pipefail
 
-EOF
-"""
+# NixOS install script (matching README workflow)
+
+echo "Generating hardware config..."
 sudo nixos-generate-config 2>/dev/null
+
+echo "Setting up ~/.config/nixos..."
 mkdir -p ~/.config/nixos
+
+# Move repo from ~/nixos to ~/.config/nixos
 mv ~/nixos/.git ~/.config/nixos/
-mv ~/nixos/.gitignore ~/.config/nixos/
-mv ~/nixos/.gitattributes ~/.config/nixos/
+mv ~/nixos/.gitignore ~/.config/nixos/ 2>/dev/null || true
+mv ~/nixos/.gitattributes ~/.config/nixos/ 2>/dev/null || true
 mv ~/nixos/* ~/.config/nixos/
-cat >~/.config/nixos/nix/env.nix <<EOF
+
+echo "Creating env.nix with placeholder values..."
+cat >~/.config/nixos/nix/env.nix <<'EOF'
 {
-  username = "john";
-  hostname = "Workpc-1234";
-  fullname = "John Doe";
+  username = "youruser";
+  hostname = "yourhost";
+  fullname = "Your Name";
   locale = "en_US.UTF-8";
   timezone = "America/Chicago";
-  ssid = "Super Secret Network 1234";
-  netkey = "1234tacos";
+  ssid = "YourNetwork";
+  netkey = "yourpassword";
   gateway = "192.168.1.254";
-  address = "192.168.1.233";
-  ethinterface = "eno1"
-  server = "192.168.1.224";
+  address = "192.168.1.100";
+  ethinterface = "eno1";
+  server = "localhost";
   dns = "1.1.1.1";
-  domain = "example.com"
-  gitkey = "API-123456789";
+  domain = "local";
+  gitkey = "";
   folder = "bg";
-  imgbb = "API-123456789";
-  resetimg = "bg/building-meteor.jpeg";
+  imgbb = "";
+  resetimg = "bg/wall.jpg";
   lockimg = "bg/wall.jpg";
-  wallpass = "pass4wallz";
-  chatpass = "pass4discord";
-  musicpass = "pass4beatz";
+  wallpass = "";
+  chatpass = "";
+  musicpass = "";
 }
 EOF
-nano ~/.config/nixos/nix/env.nix
+
+echo "Creating empty custom configs..."
 echo "{ ... }: {}" >~/.config/nixos/nix/custom.nix
 echo "{ ... }: {}" >~/.config/nixos/nix/custom-home.nix
-rmdir ~/nixos ~/Desktop ~/Documents ~/Downloads ~/Music ~/Pictures ~/Public ~/Templates ~/Videos 2>/dev/null
-rm ~/.config/user-dirs.dirs 2>/dev/null
-sudo mv /etc/nixos/hardware-configuration.nix ~/.config/nixos/nix/hardware.nix
+
+echo "Moving hardware config..."
+sudo mv /etc/nixos/hardware-configuration.nix ~/.config/nixos/nix/hardware.nix 2>/dev/null || true
 sudo rm -rf /etc/nixos/
-cat >~/.config/nixos/nix/options.nix <<EOF
+
+echo "Creating options.nix with sensible defaults..."
+cat >~/.config/nixos/nix/options.nix <<'EOF'
 { ... }:
 {
-config = {
-windowmanager.enable = true;
-managenet.enable = false;
-ssh.enable = false;
-ytmusic.enable = false;
-jelly.enable = false;
-japanese.enable = false;
-work.enable = false;
-editor.enable = false;
-#gaming.enable = false;
-#hacking.enable = false;
-#development.enable = false;
-#vpn.enable = false;
-#opensnitch.enable = false;
-#qemu.enable = false;
-#streaming.enable = false;
-#gui.enable = false;
-#airdrop.enable = false;
-#mpris.enable = false;
-#entertainment.enable = false;
-#drawing.enable = false;
-#chat.enable = false;
-#supersonic.enable = false;
-#spinner.enable = false;
-};
+  config = {
+    windowmanager.enable = true;
+    managenet.enable = false;
+    ssh.enable = true;
+    ytmusic.enable = false;
+    jelly.enable = false;
+    japanese.enable = false;
+    work.enable = false;
+    editor.enable = false;
+    gaming.enable = false;
+    hacking.enable = false;
+    development.enable = false;
+    vpn.enable = false;
+    opensnitch.enable = false;
+    qemu.enable = false;
+    streaming.enable = false;
+    gui.enable = false;
+    airdrop.enable = false;
+    mpris.enable = false;
+    entertainment.enable = false;
+    drawing.enable = false;
+    chat.enable = false;
+    supersonic.enable = false;
+    spinner.enable = false;
+  };
 }
 EOF
-chmod -R +x $HOME/.config/nixos/scripts/
-nano $HOME/.config/nixos/nix/options.nix
-echo 'Rebuilding NixOS...' && nix-shell -p git --run "sudo nixos-rebuild switch --flake $HOME/.config/nixos/nix --impure --quiet --cores=$(nproc) --max-jobs=$(nproc)" && echo Done!
+
+chmod -R +x ~/.config/nixos/scripts/ 2>/dev/null || true
+
+# Clean up default directories
+rmdir ~/nixos ~/Desktop ~/Documents ~/Downloads ~/Music ~/Pictures ~/Public ~/Templates ~/Videos 2>/dev/null || true
+rm ~/.config/user-dirs.dirs 2>/dev/null || true
+
+echo ""
+echo "Setup complete! Next steps:"
+echo "1. Edit ~/.config/nixos/nix/env.nix with your values"
+echo "2. Edit ~/.config/nixos/nix/options.nix to enable desired features"
+echo "3. Run: sudo nixos-rebuild switch --flake ~/.config/nixos/nix --impure"

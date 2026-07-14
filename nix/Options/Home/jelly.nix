@@ -1,9 +1,4 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}:
+{ config, lib, env, pkgs, pkgs-stable, pkgs-master, inputs, ... }:
 
 let
   actualUser = builtins.getEnv "SUDO_USER";

@@ -1,16 +1,4 @@
-{
-  pkgs,
-  nur,
-  pkgs-stable,
-  config,
-  lib,
-  ...
-}:
-let
-  actualUser = builtins.getEnv "SUDO_USER";
-  user = if actualUser != "" then actualUser else builtins.getEnv "USER";
-  env = import /home/${user}/.config/nixos/nix/env.nix;
-in
+{ lib, config, env, pkgs, nur, pkgs-stable, ... }:
 {
   home.file.".config/nvim" = {
     source = ../../data/nvim;
@@ -49,7 +37,7 @@ in
                 rm -dfr ~/Downloads
                 rm -dfr ~/.zsh_history
                 pfetch
-        	source ${pkgs.zsh-autosuggestions}/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+        \tsource ${pkgs.zsh-autosuggestions}/share/zsh-autosuggestions/zsh-autosuggestions.zsh
                 source ${pkgs.zsh-syntax-highlighting}/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
                 source ${pkgs.zsh-history-substring-search}/share/zsh-history-substring-search/zsh-history-substring-search.zsh
                 source ${pkgs.fzf}/share/fzf/key-bindings.zsh

@@ -1,16 +1,8 @@
 # nix/modules/gaming.nix
-{
-  config,
-  lib,
-  pkgs,
-  winegdk,
-  ...
-}:
+{ config, lib, pkgs, winegdk, env, ... }:
 
 let
-  actualUser = builtins.getEnv "SUDO_USER";
-  user = if actualUser != "" then actualUser else builtins.getEnv "USER";
-  env = import /home/${user}/.config/nixos/nix/env.nix;
+  cfg = config.gaming;
   username = env.username;
 in
 {

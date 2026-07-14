@@ -1,9 +1,4 @@
-{ pkgs, ... }:
-let
-  actualUser = builtins.getEnv "SUDO_USER";
-  user = if actualUser != "" then actualUser else builtins.getEnv "USER";
-  env = import /home/${user}/.config/nixos/nix/env.nix;
-in
+{ pkgs, env, ... }:
 {
   users.users.${env.username} = {
     isNormalUser = true;

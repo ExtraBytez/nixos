@@ -1,27 +1,16 @@
 # Main.nix
-{
-  lib,
-  inputs,
-  pkgs-stable,
-  pkgs-master,
-  nur,
-  winegdk,
-  ...
-}:
+{ lib, inputs, pkgs-stable, pkgs-master, nur, winegdk, env, ... }:
 
 let
-  actualUser = builtins.getEnv "SUDO_USER";
-  user = if actualUser != "" then actualUser else builtins.getEnv "USER";
-  env = import /home/${user}/.config/nixos/nix/env.nix;
   username = env.username;
   hostname = env.hostname;
 in
 {
   # Primary imports — including your options module
   imports = [
-    (import /home/${username}/.config/nixos/nix/hardware.nix)
-    (import /home/${username}/.config/nixos/nix/custom.nix)
-    /home/${username}/.config/nixos/nix/options.nix # ← This enables hello.enable, etc.
+    ./hardware.nix
+    ./custom.nix
+    ./options.nix
     ./Options/System
     ./System
   ];
@@ -46,24 +35,20 @@ in
   home-manager.useGlobalPkgs = true;
   home-manager.useUserPackages = true;
   home-manager.extraSpecialArgs = {
-    inherit
-      inputs
-      pkgs-stable
-      nur
-      winegdk
-      pkgs-master
-      ;
-  };
+      inherit
+        inputs
+        pkgs-stable
+        nur
+        winegdk
+        pkgs-master
+        env
+        ;
+    };
   home-manager.users.${username} =
-    {
-      config,
-      pkgs,
-      winegdk,
-      ...
-    }:
+    { config, pkgs, winegdk, env, ... }:
     {
       imports = [
-        (import /home/${username}/.config/nixos/nix/custom-home.nix)
+        ./custom-home.nix
         ./Options/Home
         ./Home
       ];
