@@ -185,11 +185,7 @@ in
             }
           ];
 
-          Default = "StartPage";
-          Remove = [
-            "Google"
-            "Bing"
-          ];
+          Default = "SearXNG";
         };
         DownloadDirectory = "/home/${env.username}";
         PromptForDownloadLocation = false;

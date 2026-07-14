@@ -34,6 +34,12 @@ in
         noDisplay = true;
         categories = [ "Network" ];
       };
+      "dev.noctalia.Noctalia" = {
+        name = "Noctalia";
+        exec = "noctalia";
+        noDisplay = true;
+        categories = ["System"];
+      };
       nixos-manual = {
         name = "Nixos Manual";
         exec = "nixos-help";
