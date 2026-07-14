@@ -11,30 +11,36 @@ let
 in
 {
   programs = {
-  vscodium = {
-    enable = true;
-    
-    profiles.default = {
-      userSettings = {
-        "nix.enableLanguageServer" = true;
-        "nix.serverPath" = "nixd";
+    vscodium = {
+      enable = true;
 
-        "nix.serverSettings".nixd = {
-          formatting.command = [ "${pkgs.nixfmt}/bin/nixfmt" ];
-          
-          "options" = {
-            # NixOS Options
-            # Replace "your-actual-hostname" with the value of env.hostname
-            nixos.expr = ''(builtins.getFlake "/home/${env.username}/.config/nixos/nix").nixosConfigurations."${env.hostname}".options'';
+      profiles.default = {
+        extensions = [
+          pkgs.vscode-extensions.catppuccin.catppuccin-vsc
+          pkgs.vscode-extensions.catppuccin.catppuccin-vsc-icons
+          pkgs.vscode-extensions.jnoortheen.nix-ide
+        ];
+        userSettings = {
+          "workbench.colorTheme" = "Catppuccin Mocha";
+          "workbench.iconTheme" = "catppuccin-mocha";
+          "nix.enableLanguageServer" = true;
+          "nix.serverPath" = "nixd";
+          "nix.serverSettings".nixd = {
+            formatting.command = [ "${pkgs.nixfmt}/bin/nixfmt" ];
 
-            # Home Manager Options (Integrated via NixOS module)
-            # Replace "{$env.username"" and "{$env.hostname}"
-            home-manager.expr = ''(builtins.getFlake "/home/${env.username}/.config/nixos/nix").nixosConfigurations."${env.hostname}".options.home-manager.users.type.getSubOptions []'';
+            "options" = {
+              # NixOS Options
+              # Replace "your-actual-hostname" with the value of env.hostname
+              nixos.expr = ''(builtins.getFlake "/home/${env.username}/.config/nixos/nix").nixosConfigurations."${env.hostname}".options'';
+
+              # Home Manager Options (Integrated via NixOS module)
+              # Replace "{$env.username"" and "{$env.hostname}"
+              home-manager.expr = ''(builtins.getFlake "/home/${env.username}/.config/nixos/nix").nixosConfigurations."${env.hostname}".options.home-manager.users.type.getSubOptions []'';
+            };
           };
         };
       };
     };
-  };
     zsh = {
       enable = true;
       shellAliases = {

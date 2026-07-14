@@ -30,8 +30,8 @@
     let
       system = "x86_64-linux";
       actualUser = builtins.getEnv "SUDO_USER";
-  user = if actualUser != "" then actualUser else builtins.getEnv "USER";
-  env = import /home/${user}/.config/nixos/nix/Generated/env.nix;
+      user = if actualUser != "" then actualUser else builtins.getEnv "USER";
+      env = import /home/${user}/.config/nixos/nix/Generated/env.nix;
       pkgs-stable = import nixpkgs-stable {
         inherit system;
       };
