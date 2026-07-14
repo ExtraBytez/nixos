@@ -37,9 +37,9 @@
       ... }@inputs:
     let
       system = "x86_64-linux";
-      username = "nate";
-      hostname = "roswaal";
       env = import ./env.nix;
+      username = env.username;
+      hostname = env.hostname;
 
       pkgs-stable = import nixpkgs-stable {
         inherit system;
