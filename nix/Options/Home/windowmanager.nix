@@ -110,6 +110,7 @@ in
       };
     };
     home.packages = with pkgs; [
+      bitwarden-desktop
       hyprpicker
       alacritty
       nerd-fonts.jetbrains-mono
