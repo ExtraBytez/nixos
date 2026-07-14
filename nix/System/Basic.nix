@@ -32,6 +32,9 @@
     fd
     macchanger
     gdb
+    nixd
+    nixfmt
+    nil
   ];
   virtualisation.docker.enable = true;
   programs = {
