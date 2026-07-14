@@ -25,6 +25,8 @@ in
           "workbench.iconTheme" = "catppuccin-mocha";
           "editor.formatOnSave" = true;
           "git.enableSmartCommit" = true;
+          "git.autofetch" = true;
+          "git.confirmSync" = true;
           "nix.enableLanguageServer" = true;
           "nix.serverPath" = "nixd";
           "nix.serverSettings".nixd = {
