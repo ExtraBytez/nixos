@@ -48,8 +48,6 @@ ssh.enable = false;
 ytmusic.enable = false;
 jelly.enable = false;
 japanese.enable = false;
-development.enable = false;
-airdrop.enable = false;
 };
 }
 EOF

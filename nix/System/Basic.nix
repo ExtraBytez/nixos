@@ -4,6 +4,8 @@
 }:
 {
   environment.systemPackages = with pkgs; [
+    docker
+    docker-compose
     tldr
     gitui
     tree
@@ -31,6 +33,7 @@
     macchanger
     gdb
   ];
+  virtualisation.docker.enable = true;
   programs = {
     nix-ld.enable = true;
     zsh.enable = true;

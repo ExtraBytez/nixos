@@ -11,7 +11,7 @@ let
 in
 {
   programs = {
-    vscodium = {
+    vscodium = lib.mkIf config.windowmanager.enable {
       enable = true;
 
       profiles.default = {
@@ -23,6 +23,8 @@ in
         userSettings = {
           "workbench.colorTheme" = "Catppuccin Mocha";
           "workbench.iconTheme" = "catppuccin-mocha";
+          "editor.formatOnSave" = true;
+          "git.enableSmartCommit" = true;
           "nix.enableLanguageServer" = true;
           "nix.serverPath" = "nixd";
           "nix.serverSettings".nixd = {
