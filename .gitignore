@@ -3,3 +3,4 @@ nix/custom.nix
 nix/Generated/env.nix
 nix/Generated/options.nix
 nix/custom-home.nix
+nix/Generated
