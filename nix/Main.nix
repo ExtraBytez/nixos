@@ -39,6 +39,9 @@ in
       "mdk-sdk"
       "cloudflare-warp"
     ];
+  nixpkgs.config.permittedInsecurePackages = [
+    "electron-39.8.10"
+  ];
 
   system.stateVersion = "25.11";
 
@@ -56,9 +59,6 @@ in
   };
   home-manager.users.${username} =
     {
-      config,
-      pkgs,
-      winegdk,
       ...
     }:
     {

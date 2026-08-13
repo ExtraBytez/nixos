@@ -32,7 +32,7 @@ in
     '';
 
     xdg.desktopEntries = {
-      "com.github.th_ch.youtube_music" = {
+      "com.github.th-ch.youtube-music" = {
         name = "YTMusic";
         exec = "zsh /home/${username}/.config/nixos/data/ytmusic/musiclock.zsh";
         icon = "youtube-music";
