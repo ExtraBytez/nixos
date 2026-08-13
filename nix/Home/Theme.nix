@@ -16,10 +16,10 @@
     enable = true;
     gtk4.theme = null;
     colorScheme = "dark";
-    theme = {
-      name = "Sweet";
-      package = pkgs.sweet;
-    };
+    #theme = {
+    # name = "Sweet";
+    #package = pkgs.sweet;
+    #};
     iconTheme = {
       name = "Candy";
       package = pkgs.candy-icons;
