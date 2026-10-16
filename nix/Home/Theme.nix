@@ -28,6 +28,6 @@
   # For Qt applications (optional but recommended)
   qt = lib.mkIf config.windowmanager.enable {
     enable = true;
-    platformTheme.name = "gtk2"; # Makes Qt apps follow GTK theme
+#    platformTheme.name = "gtk2"; # Makes Qt apps follow GTK theme
   };
 }
