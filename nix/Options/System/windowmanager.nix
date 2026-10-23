@@ -61,10 +61,28 @@ in
       font-awesome
       material-design-icons
       zenity
+      networkmanager-openvpn
     ];
     services.dbus.packages = with pkgs; [
       libappindicator-gtk3
     ];
+    networking.firewall.allowedTCPPorts = [ 53317 ];
+    networking.firewall.allowedUDPPorts = [ 53317 ];
+    programs.noctalia.recommendedServices.enable = true;
+    services.resolved = {
+      enable = true;
+      settings.Resolve = {
+        DNS = [
+          "9.9.9.9#dns.quad9.net"
+          "149.112.112.112#dns.quad9.net"
+        ];
+        FallbackDNS = [ ];
+        DNSOverTLS = "true";
+        DNSSEC = "true";
+        Domains = [ "~." ];
+      };
+    };
+    networking.networkmanager.plugins = with pkgs; [ networkmanager-openvpn ];
     home-manager.users.${username}.windowmanager.enable = true;
   };
 }

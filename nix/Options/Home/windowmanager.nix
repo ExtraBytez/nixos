@@ -21,6 +21,7 @@ in
       enable = true;
       package = pkgs.hyprshot;
     };
+    services.network-manager-applet.enable = true;
     home.packages = with pkgs; [
       ntfy-sh
       hyprpicker
@@ -30,6 +31,8 @@ in
       hicolor-icon-theme
       bitwarden-cli
       python3
+      localsend
+      networkmanager-openvpn
     ];
     home.file = {
       ".config/cava/config".text = ''
