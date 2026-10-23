@@ -4,3 +4,6 @@ nix/Generated/env.nix
 nix/Generated/options.nix
 nix/custom-home.nix
 nix/Generated
+data/bg/*
+!data/bg/building-meteor.jpeg
+!data/bg/wall.jpeg

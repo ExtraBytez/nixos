@@ -21,6 +21,7 @@ in
 
   config = lib.mkIf config.windowmanager.enable {
     programs.hyprland.enable = true;
+    services.upower.enable = true;
     hardware.bluetooth.enable = true;
     services.pulseaudio.enable = false;
     services.gnome.gnome-keyring.enable = true;
@@ -43,7 +44,6 @@ in
       wev
       brightnessctl
       xwayland-satellite
-      fuzzel
       gnome-keyring
       wl-clipboard
       (catppuccin-sddm.override {
