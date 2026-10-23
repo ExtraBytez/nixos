@@ -12,6 +12,17 @@ let
   username = env.username;
 
   cfg = config.ytmusic;
+
+  limusic =
+    let
+      pname = "limusic";
+      version = "1.3.0";
+      src = pkgs.fetchurl {
+        url = "https://github.com/SimoHypers/limusic/releases/download/v1.3.0/limusic_1.3.0_amd64.AppImage";
+        hash = "sha256-skhW7OeTMN06Y/WvI5Tm+Dja50rtxh42d0Q96Qwrc4c=";
+      };
+    in
+    pkgs.appimageTools.wrapType2 { inherit pname version src; };
 in
 {
   options.ytmusic = {
@@ -23,18 +34,12 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    home.packages = [ pkgs.pear-desktop ];
-    home.activation.ytmusicConfig = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-      mkdir -p "$HOME/.config/YouTube Music"
-      cp -f ${../../../data/ytmusic/config.json} \
-        "$HOME/.config/YouTube Music/config.json"
-      sed -i -e "s|@YT_THEME@|/home/${username}/.config/nixos/data/ytmusic/mocha.css|g" "$HOME/.config/YouTube Music/config.json"
-    '';
+    home.packages = [ limusic ];
 
     xdg.desktopEntries = {
-      "com.github.th-ch.youtube-music" = {
+      "Limusc" = {
         name = "YTMusic";
-        exec = "zsh /home/${username}/.config/nixos/data/ytmusic/musiclock.zsh";
+        exec = "limusic";
         icon = "youtube-music";
         categories = [ "Network" ];
       };
