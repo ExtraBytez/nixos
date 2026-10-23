@@ -13,6 +13,8 @@
     gtk.enable = true;
   };
   gtk = lib.mkIf config.windowmanager.enable {
+    gtk4.theme = null;
+    colorScheme = "dark";
     enable = true;
     theme = {
       name = "Catppuccin";
@@ -23,7 +25,6 @@
       package = pkgs.candy-icons;
     };
   };
-  # For Qt applications (optional but recommended)
   qt = lib.mkIf config.windowmanager.enable {
     enable = true;
   };
