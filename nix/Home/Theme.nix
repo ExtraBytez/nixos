@@ -13,19 +13,20 @@
     gtk.enable = true;
   };
   gtk = lib.mkIf config.windowmanager.enable {
-    gtk4.theme = null;
-    colorScheme = "dark";
     enable = true;
+    colorScheme = "dark";
     theme = {
-      name = "Catppuccin";
-      package = pkgs.catppuccin-gtk;
+      name = "Catppuccin-GTK-Red-Dark";
+      package = pkgs.magnetic-catppuccin-gtk.override {
+        accent = [ "red" ];
+        shade = "dark";
+      };
     };
     iconTheme = {
-      name = "Candy";
+      name = "candy-icons";
       package = pkgs.candy-icons;
     };
-  };
-  qt = lib.mkIf config.windowmanager.enable {
-    enable = true;
+
+    gtk4.theme = null;
   };
 }
