@@ -152,7 +152,7 @@ in
           "privacy.resistFingerprinting" = false;
           "browser.warnOnQuit" = false;
           "browser.warnOnQuitShortcut" = false;
-          "dom.security.https_only_mode" = false;
+          "dom.security.https_only_mode" = true;
           "media.peerconnection.ice.default_address_only" = true;
           "browser.toolbars.bookmarks.visibility" = "never";
           "privacy.clearHistory.browsingHistoryAndDownloads" = true;

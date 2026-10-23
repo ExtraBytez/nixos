@@ -28,6 +28,8 @@ in
       nerd-fonts.jetbrains-mono
       bemoji
       hicolor-icon-theme
+      bitwarden-cli
+      python3
     ];
     home.file = {
       ".config/cava/config".text = ''

@@ -28,17 +28,11 @@ in
       videos = /home/${env.username};
     };
     desktopEntries = lib.mkIf config.windowmanager.enable {
-      "com.cloudflare.WarpTaskbar" = {
-        name = "Warp";
-        exec = "warp-taskbar";
-        noDisplay = true;
-        categories = [ "Network" ];
-      };
       "dev.noctalia.Noctalia" = {
         name = "Noctalia";
         exec = "noctalia";
         noDisplay = true;
-        categories = ["System"];
+        categories = [ "System" ];
       };
       nixos-manual = {
         name = "Nixos Manual";
