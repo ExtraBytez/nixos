@@ -23,7 +23,7 @@ in
       "fladder" = {
         name = "Jellyfin";
         icon = "jellyfin";
-        exec = "Fladder";
+        exec = "fladder";
         categories = [ "Network" ];
       };
     };
