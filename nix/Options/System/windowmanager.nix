@@ -40,7 +40,6 @@ in
     };
     environment.systemPackages = with pkgs; [
       inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default
-      inputs.awww.packages.${pkgs.stdenv.hostPlatform.system}.awww
       wev
       brightnessctl
       xwayland-satellite
@@ -66,9 +65,6 @@ in
     services.dbus.packages = with pkgs; [
       libappindicator-gtk3
     ];
-    services.cloudflare-warp = {
-      enable = true;
-    };
     home-manager.users.${username}.windowmanager.enable = true;
   };
 }

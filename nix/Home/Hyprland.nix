@@ -57,7 +57,6 @@ in
       ];
       exec-once = [
         "noctalia"
-        "awww-daemon"
         "warp-taskbar"
         "bitwarden"
       ]
@@ -80,9 +79,9 @@ in
         ", Print, exec, hyprshot -m region"
         "ALT, Print, exec, hyprshot -m window"
         "$mod, Print, exec, hyprshot -m output"
-        "$mod SHIFT, W, exec, awww img ~/.config/nixos/data/${env.resetimg} -t none"
+        #"$mod SHIFT, W, exec, awww img ~/.config/nixos/data/${env.resetimg} -t none"
         "$mod ALT, F, exec, zsh ~/.config/nixos/data/hyprland/fullscreen_trans.zsh"
-        "$mod, W, exec, zsh ~/.config/nixos/scripts/switchwall.zsh"
+        #"$mod, W, exec, zsh ~/.config/nixos/scripts/switchwall.zsh"
         "$mod SHIFT, period, movewindow, r"
         "$mod SHIFT, comma, movewindow, l"
         "$mod SHIFT, up, movewindow, u"
