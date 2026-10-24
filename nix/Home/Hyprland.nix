@@ -92,6 +92,7 @@ in
         "$mod, D, exec, noctalia msg panel-open launcher"
         "$mod, B, exec, librewolf"
         "$mod ALT, L, exec, noctalia msg panel-open session"
+        "$mod, A, exec, noctalia msg panel-open control-center"
         "$mod, V, exec, noctalia msg panel-open clipboard"
         "$mod, COMMA, exec, noctalia msg panel-open control-center bluetooth"
         "$mod, M, exec, noctalia msg panel-open control-center media"
