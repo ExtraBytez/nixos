@@ -34,7 +34,12 @@ in
         session = {
           default = "Hyprland";
         };
-
+        appearance = {
+          scheme = "Synced";
+          password_style = "random";
+          hide_logo = true;
+          theme_mode = "dark";
+        };
         cursor.size = 24;
         keyboard.layout = "us";
       };
@@ -43,6 +48,9 @@ in
         name = "catppuccin-mocha-red-cursors";
       };
     };
+    systemd.tmpfiles.rules = [
+      "L+ /var/lib/AccountsService/icons/${env.username} - - - - /home/${env.username}/.face.png"
+    ];
     services.pipewire = {
       enable = true;
       alsa.enable = true;
