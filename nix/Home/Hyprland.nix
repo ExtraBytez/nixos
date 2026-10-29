@@ -103,7 +103,7 @@ in
         "$mod CTRL, Q, forcekillactive"
         "$mod, F, fullscreenstate, 1"
         "$mod SHIFT, F, fullscreenstate, 2"
-        "$mod, V, togglefloating"
+        "$mod SHIFT, V, togglefloating"
         "$mod, 1, workspace, 1"
         "$mod, 2, workspace, 2"
         "$mod, 3, workspace, 3"

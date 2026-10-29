@@ -25,13 +25,23 @@ in
     hardware.bluetooth.enable = true;
     services.pulseaudio.enable = false;
     services.gnome.gnome-keyring.enable = true;
-    services.displayManager = {
-      sddm = {
-        enable = true;
-        wayland.enable = true;
-        theme = "catppuccin-mocha-red";
+    services.displayManager.noctalia-greeter = {
+      enable = true;
+      settings = {
+        user = {
+          default = "nate";
+        };
+        session = {
+          default = "Hyprland";
+        };
+
+        cursor.size = 24;
+        keyboard.layout = "us";
       };
-      defaultSession = "hyprland";
+      cursorTheme = {
+        package = pkgs.catppuccin-cursors.mochaRed;
+        name = "catppuccin-mocha-red-cursors";
+      };
     };
     services.pipewire = {
       enable = true;
@@ -46,13 +56,6 @@ in
       xwayland-satellite
       gnome-keyring
       wl-clipboard
-      (catppuccin-sddm.override {
-        flavor = "mocha";
-        accent = "red";
-        font = "Noto Sans";
-        fontSize = "9";
-        loginBackground = false;
-      })
       libnotify
       adwaita-qt
       adwaita-qt6
