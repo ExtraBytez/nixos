@@ -96,7 +96,6 @@ in
     };
     networking.networkmanager.plugins = with pkgs; [ networkmanager-openvpn ];
     home-manager.users.${username}.windowmanager.enable = true;
-    imports = [ inputs.monique.nixosModules.default ];
     programs.monique.enable = true;
   };
 }

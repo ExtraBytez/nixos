@@ -50,6 +50,7 @@
         };
         modules = [
           ./Main.nix
+          inputs.monique.nixosModules.default
           home-manager.nixosModules.home-manager
         ];
       };
