@@ -112,7 +112,7 @@ in
           }
         ];
       };
-
+      # Window Animations
       animation = [
         {
           leaf = "windowsIn";
@@ -158,7 +158,7 @@ in
         }
       ];
 
-      # order matters: rules are evaluated top to bottom
+      # Opacity rules
       window_rule = [
         {
           match.class = "^(osu!)$";
@@ -188,7 +188,7 @@ in
           maximize = true;
         }
       ];
-
+      #Startup apps
       on = [
         {
           _args = [
@@ -201,7 +201,7 @@ in
           ];
         }
       ];
-
+      #Binds
       bind = [
         # launchers / apps
         (mkBind (withMod "T") (exec "alacritty"))
@@ -264,7 +264,7 @@ in
         (hold "XF86AudioMicMute" (exec "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"))
       ]
       ++ (
-        # $mod + [shift +] {1..9} -> [move to] workspace {1..9}, via keycodes
+        # Workspace method
         builtins.concatLists (
           builtins.genList (
             i:
@@ -280,7 +280,7 @@ in
       );
     };
 
-    # submaps are plain Lua here
+    #ReSizer
     extraConfig = ''
       hl.define_submap("resize", function()
         local dirs = {
