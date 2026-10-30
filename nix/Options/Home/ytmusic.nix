@@ -12,7 +12,6 @@ let
   username = env.username;
 
   cfg = config.ytmusic;
-
   limusic =
     let
       pname = "limusic";
@@ -22,7 +21,13 @@ let
         hash = "sha256-skhW7OeTMN06Y/WvI5Tm+Dja50rtxh42d0Q96Qwrc4c=";
       };
     in
-    pkgs.appimageTools.wrapType2 { inherit pname version src; };
+    pkgs.appimageTools.wrapType2 {
+      inherit pname version src;
+
+      extraPkgs = pkgs: [
+        pkgs.libgpg-error
+      ];
+    };
 in
 {
   options.ytmusic = {
