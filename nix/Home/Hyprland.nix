@@ -1,163 +1,299 @@
 { lib, config, ... }:
 let
-  actualUser = builtins.getEnv "SUDO_USER";
-  user = if actualUser != "" then actualUser else builtins.getEnv "USER";
-  env = import /home/${user}/.config/nixos/nix/Generated/env.nix;
+  lua = lib.generators.mkLuaInline;
+
+  # key string with the SUPER prefix: mod .. " + <keys>"
+  withMod = keys: lua ''mod .. " + ${keys}"'';
+
+  # hl.bind(keys, dispatcher[, opts])
+  mkBindWith = opts: keys: dsp: {
+    _args = [
+      keys
+      (lua dsp)
+    ]
+    ++ lib.optional (opts != { }) opts;
+  };
+  mkBind = mkBindWith { };
+
+  exec = cmd: ''hl.dsp.exec_cmd("${cmd}")'';
+
+  hold = mkBindWith {
+    locked = true;
+    repeating = true;
+  };
+
+  startup = [
+    "noctalia"
+    "warp-taskbar"
+    "bitwarden"
+  ]
+  ++ lib.optional config.japanese.enable "fcitx5";
 in
 {
   wayland.windowManager.hyprland = lib.mkIf config.windowmanager.enable {
     enable = true;
-    configType = "hyprlang";
+    configType = "lua";
+
     settings = {
-      monitor = ", preferred, auto, 1";
-      bezier = "springy, 0.13, 0.99, 0.29, 1.1";
-      general = {
-        layout = "dwindle";
-        gaps_in = 5;
-        gaps_out = 10;
-        border_size = 3;
-        "col.active_border" =
-          "rgba(ff0000ff) rgba(ffff00ff) rgba(00ff00ff) rgba(00ffffff) rgba(0000ffff) rgba(ff00ffff) 45deg";
-        "col.inactive_border" = "rgba(595959aa)";
+      mod._var = "SUPER";
+
+      monitor = {
+        output = "";
+        mode = "preferred";
+        position = "auto";
+        scale = 1;
       };
-      decoration = {
-        rounding = 10;
-        fullscreen_opacity = 1;
-        blur = {
-          enabled = true;
-          size = 3;
-          passes = 3;
+
+      config = {
+        cursor = {
+          inactive_timeout = 0;
+        };
+        general = {
+          layout = "dwindle";
+          gaps_in = 5;
+          gaps_out = 10;
+          border_size = 3;
+          col = {
+            active_border = {
+              colors = [
+                "rgba(ff0000ff)"
+                "rgba(ffff00ff)"
+                "rgba(00ff00ff)"
+                "rgba(00ffffff)"
+                "rgba(0000ffff)"
+                "rgba(ff00ffff)"
+              ];
+              angle = 45;
+            };
+            inactive_border = "rgba(595959aa)";
+          };
         };
 
-        shadow = {
-          enabled = true;
-          range = 4;
-          render_power = 3;
-          color = "rgba(1a1a1aee)";
+        decoration = {
+          rounding = 10;
+          fullscreen_opacity = 1;
+          blur = {
+            enabled = true;
+            size = 3;
+            passes = 3;
+          };
+          shadow = {
+            enabled = true;
+            range = 4;
+            render_power = 3;
+            color = "rgba(1a1a1aee)";
+          };
+        };
+
+        input.natural_scroll = false;
+        binds.drag_threshold = 10;
+
+        misc = {
+          disable_splash_rendering = true;
+          disable_hyprland_logo = true;
         };
       };
+
+      curve = {
+        _args = [
+          "springy"
+          {
+            type = "bezier";
+            points = [
+              [
+                0.13
+                0.99
+              ]
+              [
+                0.29
+                1.1
+              ]
+            ];
+          }
+        ];
+      };
+
       animation = [
-        "windowsIn, 1, 7, springy, popin 90%"
-        "windowsOut, 1, 7, springy, popin 90%"
-        "windowsMove, 1, 7, springy, slide"
-        "workspaces, 1, 7, springy, slidevert"
-        "fade, 1, 7, springy"
+        {
+          leaf = "windowsIn";
+          enabled = true;
+          speed = 7;
+          bezier = "springy";
+          style = "popin 90%";
+        }
+        {
+          leaf = "windowsOut";
+          enabled = true;
+          speed = 7;
+          bezier = "springy";
+          style = "popin 90%";
+        }
+        {
+          leaf = "windowsMove";
+          enabled = true;
+          speed = 7;
+          bezier = "springy";
+          style = "slide";
+        }
+        {
+          leaf = "workspaces";
+          enabled = true;
+          speed = 7;
+          bezier = "springy";
+          style = "slidevert";
+        }
+        {
+          leaf = "fade";
+          enabled = true;
+          speed = 7;
+          bezier = "springy";
+        }
       ];
-      layerrule = [
-        "blur on, match:namespace waybar"
-        "ignore_alpha 0, match:namespace waybar"
+
+      layer_rule = [
+        {
+          match.namespace = "waybar";
+          blur = true;
+          ignore_alpha = 0;
+        }
       ];
-      windowrule = [
-        "no_blur on, match:class ^(osu!)$"
-        "opacity 0.70 0.70, match:focus 0"
-        "opacity 0.90 0.90, match:focus 1"
-        "opacity 0.95 0.95, match:class ^(Alacritty)$"
-        "opacity 0.70 0.70, match:class ^(Alacritty)$, match:focus 0"
-        "maximize on, match:class ^(Alacritty)$"
+
+      # order matters: rules are evaluated top to bottom
+      window_rule = [
+        {
+          match.class = "^(osu!)$";
+          no_blur = true;
+        }
+        {
+          match.focus = false;
+          opacity = "0.70 0.70";
+        }
+        {
+          match.focus = true;
+          opacity = "0.90 0.90";
+        }
+        {
+          match.class = "^(Alacritty)$";
+          opacity = "0.95 0.95";
+        }
+        {
+          match = {
+            class = "^(Alacritty)$";
+            focus = false;
+          };
+          opacity = "0.70 0.70";
+        }
+        {
+          match.class = "^(Alacritty)$";
+          maximize = true;
+        }
       ];
-      exec-once = [
-        "noctalia"
-        "warp-taskbar"
-        "bitwarden"
-      ]
-      ++ lib.optionals config.japanese.enable [
-        "fcitx5"
-      ];
-      input = {
-        natural_scroll = false;
-      };
-      "$mod" = "SUPER";
-      binds = {
-        drag_threshold = 10;
-      };
-      bindm = [
-        "$mod, mouse:272, movewindow"
-        "$mod, mouse:273, resizewindow"
+
+      on = [
+        {
+          _args = [
+            "hyprland.start"
+            (lua ''
+              function()
+                ${lib.concatMapStringsSep "\n  " (c: ''hl.exec_cmd("${c}")'') startup}
+              end
+            '')
+          ];
+        }
       ];
 
       bind = [
-        "$mod, W, exec, noctalia msg panel-open wallpaper"
-        "$mod ALT, W, exec, noctalia msg panel-toggle noctalia/wallhaven:browser"
-        ", Print, exec, hyprshot -m region"
-        "ALT, Print, exec, hyprshot -m window"
-        "$mod, Print, exec, hyprshot -m output"
-        "$mod ALT, F, exec, zsh ~/.config/nixos/data/hyprland/fullscreen_trans.zsh"
-        "$mod SHIFT, period, movewindow, r"
-        "$mod SHIFT, comma, movewindow, l"
-        "$mod SHIFT, up, movewindow, u"
-        "$mod SHIFT, down, movewindow, d"
-        "$mod, PERIOD, exec, hyprpicker | wl-copy"
-        "$mod, SPACE, exec,  noctalia msg panel-open launcher /emo "
-        "$mod, T, exec, alacritty"
-        "$mod, D, exec, noctalia msg panel-open launcher"
-        "$mod, B, exec, librewolf"
-        "$mod ALT, L, exec, noctalia msg panel-open session"
-        "$mod, A, exec, noctalia msg panel-open control-center"
-        "$mod, V, exec, noctalia msg panel-open clipboard"
-        "$mod, COMMA, exec, noctalia msg panel-open control-center bluetooth"
-        "$mod, M, exec, noctalia msg panel-open control-center media"
-        "$mod, L, exec, noctalia msg session lock"
-        "$mod, O, exec, noctalia msg settings-toggle"
-        "$mod ALT, E, exit"
-        "$mod, Q, killactive"
-        "$mod CTRL, Q, forcekillactive"
-        "$mod, F, fullscreenstate, 1"
-        "$mod SHIFT, F, fullscreenstate, 2"
-        "$mod SHIFT, V, togglefloating"
-        "$mod, 1, workspace, 1"
-        "$mod, 2, workspace, 2"
-        "$mod, 3, workspace, 3"
-        "$mod, 4, workspace, 4"
-        "$mod, 5, workspace, 5"
-        "$mod, 6, workspace, 6"
-        "$mod, 7, workspace, 7"
-        "$mod, 8, workspace, 8"
-        "$mod, 9, workspace, 9"
-        "$mod SHIFT, 1, movetoworkspace, 1"
-        "$mod SHIFT, 2, movetoworkspace, 2"
-        "$mod SHIFT, 3, movetoworkspace, 3"
-        "$mod SHIFT, 4, movetoworkspace, 4"
-        "$mod SHIFT, 5, movetoworkspace, 5"
-        "$mod SHIFT, 6, movetoworkspace, 6"
-        "$mod SHIFT, 7, movetoworkspace, 7"
-        "$mod SHIFT, 8, movetoworkspace, 8"
-        "$mod SHIFT, 9, movetoworkspace, 9"
-        "$mod, R, submap, resize"
-      ];
-      bindle = [
-        ", XF86MonBrightnessUp, exec, brightnessctl set +10%"
-        ", XF86MonBrightnessDown, exec, brightnessctl set 10%-"
-        "Shift, XF86MonBrightnessUp, exec, brightnessctl set +5%"
-        "Shift, XF86MonBrightnessDown, exec, brightnessctl set 5%-"
-        "Ctrl, XF86MonBrightnessUp, exec, brightnessctl set +1%"
-        "Ctrl, XF86MonBrightnessDown, exec, brightnessctl set 1%-"
-        ", XF86AudioRaiseVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1+"
-        ", XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1-"
-        "Shift, XF86AudioRaiseVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.05+"
-        "Shift, XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.05-"
-        "Ctrl, XF86AudioRaiseVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.01+"
-        "Ctrl, XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.01-"
-        ", XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
-        ", XF86AudioMicMute, exec, wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"
-      ];
-      misc = [
-        { "disable_splash_rendering" = true; }
-        { "disable_hyprland_logo" = true; }
-      ];
+        # launchers / apps
+        (mkBind (withMod "T") (exec "alacritty"))
+        (mkBind (withMod "B") (exec "librewolf"))
+        (mkBind (withMod "D") (exec "noctalia msg panel-open launcher"))
+        (mkBind (withMod "SPACE") (exec "noctalia msg panel-open launcher /emo"))
+        (mkBind (withMod "V") (exec "noctalia msg panel-open clipboard"))
+        (mkBind (withMod "W") (exec "noctalia msg panel-open wallpaper"))
+        (mkBind (withMod "ALT + W") (exec "noctalia msg panel-toggle noctalia/wallhaven:browser"))
+
+        # control center / session
+        (mkBind (withMod "A") (exec "noctalia msg panel-open control-center"))
+        (mkBind (withMod "COMMA") (exec "noctalia msg panel-open control-center bluetooth"))
+        (mkBind (withMod "M") (exec "noctalia msg panel-open control-center media"))
+        (mkBind (withMod "O") (exec "noctalia msg settings-toggle"))
+        (mkBind (withMod "L") (exec "noctalia msg session lock"))
+        (mkBind (withMod "ALT + L") (exec "noctalia msg panel-open session"))
+        (mkBind (withMod "ALT + E") "hl.dsp.exit()")
+
+        # screenshots / picker
+        (mkBind "Print" (exec "hyprshot -m region"))
+        (mkBind "ALT + Print" (exec "hyprshot -m window"))
+        (mkBind (withMod "Print") (exec "hyprshot -m output"))
+        (mkBind (withMod "PERIOD") (exec "hyprpicker | wl-copy"))
+
+        # window management
+        (mkBind (withMod "Q") "hl.dsp.window.close()")
+        (mkBind (withMod "CTRL + Q") "hl.dsp.window.kill()")
+        (mkBind (withMod "F") ''hl.dsp.window.fullscreen_state({ internal = 1, client = -1, action = "toggle" })'')
+        (mkBind (withMod "SHIFT + F") ''hl.dsp.window.fullscreen_state({ internal = 2, client = -1, action = "toggle" })'')
+        (mkBind (withMod "ALT + F") (exec "zsh ~/.config/nixos/data/hyprland/fullscreen_trans.zsh"))
+        (mkBind (withMod "SHIFT + V") ''hl.dsp.window.float({ action = "toggle" })'')
+        (mkBind (withMod "SHIFT + PERIOD") ''hl.dsp.window.move({ direction = "r" })'')
+        (mkBind (withMod "SHIFT + COMMA") ''hl.dsp.window.move({ direction = "l" })'')
+        (mkBind (withMod "SHIFT + UP") ''hl.dsp.window.move({ direction = "u" })'')
+        (mkBind (withMod "SHIFT + DOWN") ''hl.dsp.window.move({ direction = "d" })'')
+
+        (mkBind (withMod "R") ''hl.dsp.submap("resize")'')
+
+        # mouse
+        (mkBindWith { mouse = true; } (withMod "mouse:272") "hl.dsp.window.drag()")
+        (mkBindWith { mouse = true; } (withMod "mouse:273") "hl.dsp.window.resize()")
+
+        # brightness
+        (hold "XF86MonBrightnessUp" (exec "brightnessctl set +10%"))
+        (hold "XF86MonBrightnessDown" (exec "brightnessctl set 10%-"))
+        (hold "SHIFT + XF86MonBrightnessUp" (exec "brightnessctl set +5%"))
+        (hold "SHIFT + XF86MonBrightnessDown" (exec "brightnessctl set 5%-"))
+        (hold "CTRL + XF86MonBrightnessUp" (exec "brightnessctl set +1%"))
+        (hold "CTRL + XF86MonBrightnessDown" (exec "brightnessctl set 1%-"))
+
+        # volume
+        (hold "XF86AudioRaiseVolume" (exec "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1+"))
+        (hold "XF86AudioLowerVolume" (exec "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1-"))
+        (hold "SHIFT + XF86AudioRaiseVolume" (exec "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.05+"))
+        (hold "SHIFT + XF86AudioLowerVolume" (exec "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.05-"))
+        (hold "CTRL + XF86AudioRaiseVolume" (exec "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.01+"))
+        (hold "CTRL + XF86AudioLowerVolume" (exec "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.01-"))
+        (hold "XF86AudioMute" (exec "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"))
+        (hold "XF86AudioMicMute" (exec "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"))
+      ]
+      ++ (
+        # $mod + [shift +] {1..9} -> [move to] workspace {1..9}, via keycodes
+        builtins.concatLists (
+          builtins.genList (
+            i:
+            let
+              ws = toString (i + 1);
+            in
+            [
+              (mkBind (withMod "code:1${toString i}") "hl.dsp.focus({ workspace = ${ws} })")
+              (mkBind (withMod "SHIFT + code:1${toString i}") "hl.dsp.window.move({ workspace = ${ws} })")
+            ]
+          ) 9
+        )
+      );
     };
+
+    # submaps are plain Lua here
     extraConfig = ''
-      submap = resize
-      binde = , right, resizeactive, 10 0
-      binde = , left, resizeactive, -10 0
-      binde = , up, resizeactive, 0 -10
-      binde = , down, resizeactive, 0 10
-      binde = SHIFT, right, resizeactive, 50 0
-      binde = SHIFT, left, resizeactive, -50 0
-      binde = SHIFT, up, resizeactive, 0 -50
-      binde = SHIFT, down, resizeactive, 0 50
-      bind = , escape, submap, reset
-      bind = , Return, submap, reset
-      submap = reset
+      hl.define_submap("resize", function()
+        local dirs = {
+          right = { 1, 0 }, left = { -1, 0 },
+          up = { 0, -1 }, down = { 0, 1 },
+        }
+        for key, d in pairs(dirs) do
+          hl.bind(key, hl.dsp.window.resize({ x = d[1] * 10, y = d[2] * 10, relative = true }), { repeating = true })
+          hl.bind("SHIFT + " .. key, hl.dsp.window.resize({ x = d[1] * 50, y = d[2] * 50, relative = true }), { repeating = true })
+        end
+        hl.bind("escape", hl.dsp.submap("reset"))
+        hl.bind("Return", hl.dsp.submap("reset"))
+      end)
     '';
   };
 }

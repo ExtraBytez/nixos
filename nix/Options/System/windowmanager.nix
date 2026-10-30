@@ -21,6 +21,7 @@ in
 
   config = lib.mkIf config.windowmanager.enable {
     programs.hyprland.enable = true;
+    programs.hyprland.package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
     services.upower.enable = true;
     hardware.bluetooth.enable = true;
     services.pulseaudio.enable = false;
@@ -95,5 +96,7 @@ in
     };
     networking.networkmanager.plugins = with pkgs; [ networkmanager-openvpn ];
     home-manager.users.${username}.windowmanager.enable = true;
+    imports = [ inputs.monique.nixosModules.default ];
+    programs.monique.enable = true;
   };
 }
