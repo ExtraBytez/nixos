@@ -6,7 +6,6 @@
     master.url = "github:NixOS/nixpkgs/master";
     nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-25.05";
     hyprland.url = "github:hyprwm/Hyprland";
-    monique.url = "github:ToRvaLDz/monique";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -50,7 +49,7 @@
         };
         modules = [
           ./Main.nix
-          inputs.monique.nixosModules.default
+          #Add inputs here
           home-manager.nixosModules.home-manager
         ];
       };

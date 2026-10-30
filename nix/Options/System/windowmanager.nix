@@ -96,6 +96,5 @@ in
     };
     networking.networkmanager.plugins = with pkgs; [ networkmanager-openvpn ];
     home-manager.users.${username}.windowmanager.enable = true;
-    programs.monique.enable = true;
   };
 }
